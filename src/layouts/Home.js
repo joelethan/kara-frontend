@@ -40,7 +40,12 @@ const panes = [
     render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane>,
   },
 ];
-
-const HomeComponent = () => <Tab menu={{ pointing: true }} panes={panes} />;
+const color = "blue";
+const HomeComponent = () => (
+  <Tab
+    menu={{ color, inverted: true, attached: false, tabular: false }}
+    panes={panes}
+  />
+);
 
 export default HomeComponent;

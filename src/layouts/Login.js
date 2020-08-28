@@ -1,23 +1,33 @@
 import React from "react";
-import { Button, Form, Grid, Image, Segment, Header } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Image,
+  Segment,
+  Header,
+  Message,
+} from "semantic-ui-react";
 import logo from "../logo.svg";
-import Navbar from "./Navbar";
 
-const LoginForm = ({ form: { onChange, form, loginFormValid, onSubmit } }) => {
+const LoginForm = ({
+  form: { onChange, form, loginFormValid, onSubmit, loading, error },
+}) => {
   return (
-    <div>
-      <Navbar />
+    <>
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
+          <Image src={logo} size="small" centered />
           <Header as="h2" color="teal" textAlign="center">
-            <Image src={logo} /> Login to your account
+            Login to your account
           </Header>
           <Form size="large">
             <Segment stacked>
+              {error && <Message negative content={"Invalid credentials"} />}
               <Form.Input
                 fluid
                 icon="user"
@@ -35,16 +45,18 @@ const LoginForm = ({ form: { onChange, form, loginFormValid, onSubmit } }) => {
                 placeholder="Password"
                 type="password"
                 name="password"
-                value={form.password || ""}
+                value={form.password || "passwordxy"}
                 onChange={onChange}
               />
 
               <Button
                 onClick={onSubmit}
-                disabled={!loginFormValid}
+                disabled={!loginFormValid || loading}
                 color="teal"
                 fluid
+                loading={loading}
                 size="large"
+                type="submit"
               >
                 Login
               </Button>
@@ -52,7 +64,7 @@ const LoginForm = ({ form: { onChange, form, loginFormValid, onSubmit } }) => {
           </Form>
         </Grid.Column>
       </Grid>
-    </div>
+    </>
   );
 };
 

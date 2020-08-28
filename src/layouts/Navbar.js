@@ -1,33 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../logo.svg";
 import { Menu, Dropdown, Button, Icon, Image } from "semantic-ui-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import logout from "../context/actions/logout";
+import { GlobalContext } from "../context/Provider";
 
 function Navbar() {
-  const { pathname } = useLocation();
+  const history = useHistory();
+
+  const { usersDispatch: dispatch } = useContext(GlobalContext);
+
+  const handleLogout = () => {
+    logout(history)(dispatch);
+    history.push("/login");
+  };
+
+  // #b51218, #c8b56f
   return (
     <Menu secondary pointing>
       <Image src={logo} size="mini" />
       <Menu.Item>
-        <Button primary basic>
+        <Button as={Link} to="/users" primary basic>
           Kara-Designs
         </Button>
       </Menu.Item>
-      {pathname === "/" && (
-        <Menu.Menu position="right">
-          <Dropdown basic icon="setting" pointing className="link item">
-            <Dropdown.Menu>
-              <Dropdown.Header>Settings</Dropdown.Header>
-              <Dropdown.Item>Add Admin</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Item>
-            <Button as={Link} to="/login" color="red" basic icon>
-              <Icon name="log out" /> Logout
-            </Button>
-          </Menu.Item>
-        </Menu.Menu>
-      )}
+      <Menu.Menu position="right">
+        <Dropdown basic icon="setting" pointing className="link item">
+          <Dropdown.Menu>
+            <Dropdown.Header>Settings</Dropdown.Header>
+            <Dropdown.Item>Add Admin</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Menu.Item>
+          <Button icon>
+            <Icon name="bell outline" />
+            <small>23</small>
+          </Button>
+        </Menu.Item>
+        <Menu.Item>
+          <Button onClick={handleLogout} color="red" basic icon>
+            <Icon name="log out" /> Logout
+          </Button>
+        </Menu.Item>
+      </Menu.Menu>
     </Menu>
   );
 }
