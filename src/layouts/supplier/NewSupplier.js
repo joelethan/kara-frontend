@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Button, Grid, Header, Card, Form, Icon } from "semantic-ui-react";
 import { genderOptions } from "../../constants/api";
+import { GlobalContext } from "../../context/Provider";
+import createClient from "../../context/actions/users/createClient";
 
-function Form1({ form, nextStep, onChange, formValid }) {
-  const continued = (e) => {
-    e.preventDefault();
-    nextStep();
+const NewSupplier = () => {
+  const {
+    // usersState,
+    usersDispatch,
+    // usersState: {
+    //   addClient: { loading, error },
+    // },
+  } = useContext(GlobalContext);
+  const [form, setForm] = useState({});
+  const onChange = (e, { name, value }) => {
+    setForm({ ...form, [name]: value });
   };
+
+  const onSubmit = () => {
+    createClient(form)(usersDispatch);
+  };
+
+  let formValid =
+    form.firstName &&
+    form.lastName &&
+    form.email &&
+    form.address &&
+    form.contact &&
+    form.gender;
+  formValid = !formValid;
 
   return (
     <div>
@@ -79,11 +101,11 @@ function Form1({ form, nextStep, onChange, formValid }) {
                   basic
                   primary
                   color="black"
-                  onClick={continued}
+                  onClick={onSubmit}
                   icon
                   labelPosition="right"
                 >
-                  Next
+                  Submit
                   <Icon name="right arrow" />
                 </Button>
               </Form>
@@ -93,6 +115,6 @@ function Form1({ form, nextStep, onChange, formValid }) {
       </Grid>
     </div>
   );
-}
+};
 
-export default Form1;
+export default NewSupplier;

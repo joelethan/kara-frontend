@@ -110,8 +110,8 @@ function Form2({ nextStep, prevStep, onChange, form }) {
                     placeholder="Shoulder to Waist"
                   />
                   <Form.Input
-                    value={form["ShoulderToLowerWaist"] || ""}
-                    name="ShoulderToLowerWaist"
+                    value={form["shoulderToLowerWaist"] || ""}
+                    name="shoulderToLowerWaist"
                     onChange={onChange}
                     label="Shoulder to Lower Waist"
                     placeholder="Shoulder to Lower Waist"
@@ -124,6 +124,27 @@ function Form2({ nextStep, prevStep, onChange, form }) {
                     onChange={onChange}
                     label="Shoulder to Hips"
                     placeholder="Shoulder to Hips"
+                  />
+                  <Form.Input
+                    value={form["bodiceCut"] || ""}
+                    name="bodiceCut"
+                    onChange={onChange}
+                    label="Bodice Cut"
+                    placeholder="Bodice Cut"
+                  />
+                  <Form.Input
+                    value={form["topFullLength"] || ""}
+                    name="topFullLength"
+                    onChange={onChange}
+                    label="Full Length"
+                    placeholder="Full Length"
+                  />
+                  <Form.Input
+                    value={form["waistCut"] || ""}
+                    name="waistCut"
+                    onChange={onChange}
+                    label="Waist Cut"
+                    placeholder="Waist Cut"
                   />
                 </Form.Group>
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import logo from "../logo.svg";
-import { Menu, Dropdown, Button, Icon, Image } from "semantic-ui-react";
+import { Menu, Button, Icon, Image } from "semantic-ui-react";
 import { Link, useHistory } from "react-router-dom";
 import logout from "../context/actions/logout";
 import { GlobalContext } from "../context/Provider";
@@ -20,17 +20,28 @@ function Navbar() {
     <Menu secondary pointing>
       <Image src={logo} size="mini" />
       <Menu.Item>
-        <Button as={Link} to="/users" primary basic>
+        <Button as={Link} to="/home" primary basic>
           Kara-Designs
+        </Button>
+        <Button
+          as={Link}
+          to="/inventory"
+          style={{
+            color: "rgb(72 163 230)",
+            backgroundColor: "transparent",
+            marginLeft: "1rem",
+          }}
+        >
+          Inventory
         </Button>
       </Menu.Item>
       <Menu.Menu position="right">
-        <Dropdown basic icon="setting" pointing className="link item">
+        {/* <Dropdown basic icon="setting" pointing className="link item">
           <Dropdown.Menu>
             <Dropdown.Header>Settings</Dropdown.Header>
             <Dropdown.Item>Add Admin</Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
         <Menu.Item>
           <Button icon>
             <Icon name="bell outline" />

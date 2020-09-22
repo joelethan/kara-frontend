@@ -61,6 +61,22 @@ function Form4({ prevStep, onChange, error, onSubmit, loading, form }) {
                     placeholder="Bottom/ Width(circumference)"
                   />
                 </Form.Group>
+                <Form.Group widths={2}>
+                  <Form.Input
+                    value={form["trouserWaist"] || ""}
+                    name="trouserWaist"
+                    onChange={onChange}
+                    label="Trouser Waist"
+                    placeholder="Trouser Waist"
+                  />
+                  <Form.Input
+                    value={form["trouserHips"] || ""}
+                    name="trouserHips"
+                    onChange={onChange}
+                    label="Trouser Hips"
+                    placeholder="Trouser Hips"
+                  />
+                </Form.Group>
                 <Header>Skirt</Header>
                 <Form.Group widths={2}>
                   <Form.Input

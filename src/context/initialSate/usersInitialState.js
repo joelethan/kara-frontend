@@ -3,14 +3,21 @@ export default {
     loading: false,
     error: null,
     data: [],
+    measurements: [],
+    supply: [],
   },
-  addUsers: {
+  addUser: {
     loading: false,
     error: null,
+    data: [],
   },
   addClient: {
     loading: false,
     error: null,
+    data: [],
+  },
+  orders: {
+    loading: false,
     data: [],
   },
 };

@@ -1,17 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 import MyWizard from "./MyForms/MyWizard";
 import { Input, Menu, Button } from "semantic-ui-react";
 import createClient from "../context/actions/users/createClient";
 import { GlobalContext } from "../context/Provider";
 import MyTable from "./del/MyTable";
-import getUsers from "../context/actions/users/getUsers";
-import { useHistory } from "react-router-dom";
 
 function ModalExample() {
   const [show, setShow] = useState(false);
-
-  const history = useHistory();
+  const [form, setForm] = useState({});
 
   const {
     usersState,
@@ -21,17 +18,11 @@ function ModalExample() {
     },
   } = useContext(GlobalContext);
 
-  useEffect(() => {
-    getUsers(history)(usersDispatch);
-  }, []);
-
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [form, setForm] = useState({});
+  const handleClose = () => setShow(false);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
-    // console.log("usersState", usersState);
   };
 
   const onSubmit = () => {

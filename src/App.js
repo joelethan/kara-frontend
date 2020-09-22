@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,8 +6,11 @@ import {
   useHistory,
 } from "react-router-dom";
 import routes from "./routes";
-import { GlobalProvider } from "./context/Provider";
+import { GlobalProvider, GlobalContext } from "./context/Provider";
 import hasToken from "./utils/hasToken";
+import getMeasurements from "./context/actions/users/getMeasurements";
+import getUsers from "./context/actions/users/getUsers";
+import getSupply from "./context/actions/users/getSupply";
 
 const RenderRoute = (route) => {
   const history = useHistory();
@@ -15,6 +18,17 @@ const RenderRoute = (route) => {
   if (route.protected && !hasToken()) {
     history.push("/login");
   }
+
+  const { usersDispatch } = useContext(GlobalContext);
+
+  if (hasToken()) {
+    useEffect(() => {
+      getMeasurements(history)(usersDispatch);
+      getUsers(history)(usersDispatch);
+      getSupply()(usersDispatch);
+    }, []);
+  }
+
   return (
     <Route
       path={route.path}

@@ -1,31 +1,27 @@
 import {
-  ADD_CLIENT_LOADING,
-  ADD_CLIENT_SUCCESS,
-  ADD_CLIENT_ERROR,
+  ADD_STAFF_LOADING,
+  ADD_STAFF_SUCCESS,
+  ADD_STAFF_ERROR,
 } from "../../../constants/actionTypes";
 import axiosInstance from "../../../helpers/axiosInstance";
 import { CONNECTION_ERROR } from "../../../constants/api";
 
 export default (data) => (dispatch) => {
   dispatch({
-    type: ADD_CLIENT_LOADING,
+    type: ADD_STAFF_LOADING,
   });
   axiosInstance()
-    .post("/user/client", data)
+    .post("/user/register", data)
     .then((res) => {
-      axiosInstance()
-        .post("measurement/" + res.data._id, data)
-        .then(() => {
-          data.setShow(false);
-          dispatch({
-            type: ADD_CLIENT_SUCCESS,
-            payload: data,
-          });
-        });
+      data.setShow(false);
+      dispatch({
+        type: ADD_STAFF_SUCCESS,
+        payload: res.data,
+      });
     })
     .catch((err) => {
       dispatch({
-        type: ADD_CLIENT_ERROR,
+        type: ADD_STAFF_ERROR,
         payload: err.response ? err.response.data : CONNECTION_ERROR,
       });
     });

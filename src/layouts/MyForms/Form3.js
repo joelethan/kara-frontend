@@ -55,6 +55,13 @@ function Form3({ nextStep, prevStep, onChange, form }) {
                   label="Width (circumference)"
                   placeholder="Width (circumference)"
                 />
+                <Form.Input
+                  value={form["capSleeve"] || ""}
+                  name="capSleeve"
+                  onChange={onChange}
+                  label="Cap Sleeve"
+                  placeholder="Cap Sleeve"
+                />
               </Form.Group>
               <Header>Dress</Header>
               <Form.Group widths={2}>
@@ -78,6 +85,13 @@ function Form3({ nextStep, prevStep, onChange, form }) {
                   onChange={onChange}
                   label="Width (circumference)"
                   placeholder="Width (circumference)"
+                />
+                <Form.Input
+                  value={form["skirtSlitLength"] || ""}
+                  name="skirtSlitLength"
+                  onChange={onChange}
+                  label="Length of Slit"
+                  placeholder="Length of Slit"
                 />
               </Form.Group>
               <Button

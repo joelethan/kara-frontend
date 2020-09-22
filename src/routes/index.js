@@ -1,7 +1,8 @@
 import Page1 from "../layouts/Page1";
 import LoginContainer from "../containers/LoginContainer";
 import usersContainer from "../containers/usersContainer";
-import MyWizard from "../layouts/MyForms/MyWizard";
+import OrderContainer from "../containers/OrderContainer";
+import ReceiptContainer from "../containers/ReceiptContainer";
 
 const routes = [
   {
@@ -23,8 +24,14 @@ const routes = [
     protected: true,
   },
   {
-    path: "/menu",
-    component: MyWizard,
+    path: "/inventory",
+    component: OrderContainer,
+    title: "Users",
+    protected: true,
+  },
+  {
+    path: "/re",
+    component: ReceiptContainer,
     title: "Users",
     protected: true,
   },
