@@ -4,7 +4,7 @@ import getOrder from "../../context/actions/users/getOrder";
 import { GlobalContext } from "../../context/Provider";
 import { Modal, Container } from "react-bootstrap";
 import Pagination from "../../helpers/Pagination";
-import { Table, Button } from "semantic-ui-react";
+import { Table, Menu, Input } from "semantic-ui-react";
 import OrderDetails from "./OrderDetails";
 import NewOrder from "./NewOrder";
 import moment from "moment";
@@ -15,7 +15,9 @@ const OrderTable = ({ orderInit, Id }) => {
     usersState: {
       users: { data: users },
     },
-    usersState: { orders: data },
+    usersState: {
+      orders: { data: orderData },
+    },
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -33,31 +35,52 @@ const OrderTable = ({ orderInit, Id }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemId, setItemId] = useState(null);
   const [postsPerPage] = useState(5);
-
-  // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = data.data.slice(indexOfFirstPost, indexOfLastPost);
-
-  // Change Page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
   const [show, setShow] = useState(false);
   const [showNew, setShowNew] = useState(!!orderInit);
   const [reShow, setReShow] = useState(false);
   const [receiptData, setReceiptData] = useState({});
+  const [searchText, setSearchText] = useState("");
+
+  // Searched Orders
+  const foundClients = orderData.filter((item) => {
+    return (
+      item.clientName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.status.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.assignedTailor.toLowerCase().search(searchText.toLowerCase()) !== -1
+    );
+  });
+
+  console.log("foundClients", foundClients);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = foundClients.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change Page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleReShow = () => setReShow(true);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const handleShowNew = () => setShowNew(true);
+  // const handleShowNew = () => setShowNew(true);
   const handleCloseNew = () => setShowNew(false);
+
+  const onSearch = (e, { value }) => {
+    setSearchText(value.trim().replace(/" "/g, ""));
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
 
   return (
     <Container>
-      <Button primary onClick={() => handleShowNew()}>
-        New Order
-      </Button>
+      <Menu secondary>
+        <Menu.Item position="right">
+          <Input icon="search" placeholder="Search ..." onChange={onSearch} />
+        </Menu.Item>
+      </Menu>
 
       <Modal
         size="lg"
@@ -131,7 +154,7 @@ const OrderTable = ({ orderInit, Id }) => {
       </Table>
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={data.data.length}
+        totalPosts={foundClients.length}
         paginate={paginate}
       />
 
