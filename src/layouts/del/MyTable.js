@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Table, Container, Placeholder } from "semantic-ui-react";
 import { Modal } from "react-bootstrap";
 import CustomerDetails from "./clientDetails";
 import Pagination from "../../helpers/Pagination";
 import { GlobalContext } from "../../context/Provider";
 
-function MyTable() {
+function MyTable({ searchText }) {
   const {
     usersState: {
       users: { loading, data, measurements },
@@ -17,24 +17,35 @@ function MyTable() {
   };
 
   const [show, setShow] = useState(false);
+  const [itemId, setItemId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const [itemId, setItemId] = useState(null);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
 
   // Get Users with measurements
   let clients = data.filter((item) => {
     return measurements ? JSON.stringify(measurements).includes(item._id) : [];
   });
 
+  // Searched Clients
+  const foundClients = clients.filter((item) => {
+    return (
+      item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.address.toLowerCase().search(searchText.toLowerCase()) !== -1
+    );
+  });
+
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = clients.slice(indexOfFirstPost, indexOfLastPost);
+  const currentClients = foundClients.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -68,7 +79,7 @@ function MyTable() {
 
             <Table.Body>
               {!!clients.length &&
-                currentPosts.map((element) => (
+                currentClients.map((element) => (
                   <Table.Row
                     onClick={() => {
                       onClick(element._id);
@@ -89,7 +100,7 @@ function MyTable() {
           </Table>
           <Pagination
             postsPerPage={postsPerPage}
-            totalPosts={clients.length}
+            totalPosts={foundClients.length}
             paginate={paginate}
           />
         </>

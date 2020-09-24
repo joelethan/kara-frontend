@@ -9,6 +9,7 @@ import MyTable from "./del/MyTable";
 function ModalExample() {
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({});
+  const [searchText, setSearchText] = useState("");
 
   const {
     usersState,
@@ -23,6 +24,10 @@ function ModalExample() {
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+  };
+
+  const onSearch = (e, { value }) => {
+    setSearchText(value.trim().replace(/" "/g, ""));
   };
 
   const onSubmit = () => {
@@ -48,11 +53,11 @@ function ModalExample() {
           </Button>
         </Menu.Item>
         <Menu.Item position="right">
-          <Input icon="search" placeholder="Search..." />
+          <Input icon="search" placeholder="Search ..." onChange={onSearch} />
         </Menu.Item>
       </Menu>
 
-      <MyTable state={usersState} />
+      <MyTable searchText={searchText} state={usersState} />
 
       <Modal size="lg" show={show} onHide={handleClose}>
         {/* <Modal.Header centered closeButton>
