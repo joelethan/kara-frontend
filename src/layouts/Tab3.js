@@ -7,10 +7,15 @@ import { Modal } from "react-bootstrap";
 
 const Tab3 = () => {
   const [show, setShow] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
   const { usersState } = useContext(GlobalContext);
+
+  const onChange = (e, { value }) => {
+    setSearchText(value.trim().replace(/" "/g, ""));
+  };
 
   return (
     <>
@@ -21,11 +26,11 @@ const Tab3 = () => {
           </Button>
         </Menu.Item>
         <Menu.Item position="right">
-          <Input icon="search" placeholder="Search..." />
+          <Input icon="search" placeholder="Search..." onChange={onChange} />
         </Menu.Item>
       </Menu>
 
-      <TeamTable state={usersState} />
+      <TeamTable searchText={searchText} state={usersState} />
 
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header>New Team Member</Modal.Header>

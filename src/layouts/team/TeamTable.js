@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Container, Placeholder } from "semantic-ui-react";
 import Pagination from "../../helpers/Pagination";
 import { Modal } from "react-bootstrap";
@@ -8,6 +8,7 @@ function TeamTable({
   state: {
     users: { loading, error, data },
   },
+  searchText,
 }) {
   const onClick = (id) => {
     console.log("onClick", id);
@@ -28,10 +29,23 @@ function TeamTable({
     (item) => item.role !== "supplier" && item.role !== "client"
   );
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
+
+  // Search through Staff
+  const foundClients = staff.filter((item) => {
+    return (
+      item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.address.toLowerCase().search(searchText.toLowerCase()) !== -1
+    );
+  });
+
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = staff.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = foundClients.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -63,7 +77,7 @@ function TeamTable({
           </Table.Header>
 
           <Table.Body>
-            {!!staff.length &&
+            {!!foundClients.length &&
               currentPosts.map((element) => (
                 <Table.Row
                   onClick={() => {
@@ -86,7 +100,7 @@ function TeamTable({
       )}
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={staff.length}
+        totalPosts={foundClients.length}
         paginate={paginate}
       />
 

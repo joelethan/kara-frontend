@@ -50,8 +50,6 @@ const OrderTable = ({ orderInit, Id }) => {
     );
   });
 
-  console.log("foundClients", foundClients);
-
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
