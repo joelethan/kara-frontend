@@ -1,6 +1,5 @@
 import Page1 from "../layouts/Page1";
 import LoginContainer from "../containers/LoginContainer";
-import usersContainer from "../containers/usersContainer";
 import OrderContainer from "../containers/OrderContainer";
 import ReceiptContainer from "../containers/ReceiptContainer";
 
@@ -15,12 +14,6 @@ const routes = [
     path: "/home",
     component: Page1,
     title: "Home",
-    protected: true,
-  },
-  {
-    path: "/users",
-    component: usersContainer,
-    title: "Users",
     protected: true,
   },
   {
