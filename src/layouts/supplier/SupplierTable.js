@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Table,
   Container,
@@ -26,29 +26,43 @@ function SupplierTable() {
 
   const [show, setShow] = useState(false);
   const [showNew, setShowNew] = useState(false);
+  const [itemId, setItemId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+  const [searchText, setSearchText] = useState("");
 
   const handleShowDt = () => setShow(true);
   const handleCloseDt = () => setShow(false);
   const handleShowNew = () => setShowNew(true);
   const handleCloseNew = () => setShowNew(false);
 
-  const [itemId, setItemId] = useState(null);
+  // Choosing the User with role supplier
+  let supplier = data.filter((item) => item.role === "supplier");
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
-
-  // Choosing the Supplier
-  let supplier = data.filter((item) => {
-    return JSON.stringify(supply).includes(item._id);
+  // Searched Suppliers
+  const foundClients = supplier.filter((item) => {
+    return (
+      item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.address.toLowerCase().search(searchText.toLowerCase()) !== -1
+    );
   });
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = supplier.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = foundClients.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const onChange = (e, { value }) => {
+    setSearchText(value.trim().replace(/" "/g, ""));
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchText]);
 
   return (
     <>
@@ -64,7 +78,7 @@ function SupplierTable() {
           </Button>
         </Menu.Item>
         <Menu.Item position="right">
-          <Input icon="search" placeholder="Search..." />
+          <Input icon="search" placeholder="Search..." onChange={onChange} />
         </Menu.Item>
       </Menu>
 
@@ -109,7 +123,7 @@ function SupplierTable() {
             </Table.Header>
 
             <Table.Body>
-              {!!supplier.length &&
+              {!!foundClients.length &&
                 currentPosts.map((element) => (
                   <Table.Row
                     onClick={() => {
@@ -132,7 +146,7 @@ function SupplierTable() {
         )}
         <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={supplier.length}
+          totalPosts={foundClients.length}
           paginate={paginate}
         />
 
@@ -148,7 +162,7 @@ function SupplierTable() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SupplierDetails id={itemId} />
+            <SupplierDetails supply={supply} id={itemId} />
           </Modal.Body>
         </Modal>
       </Container>

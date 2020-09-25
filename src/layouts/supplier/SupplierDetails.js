@@ -2,7 +2,8 @@ import React from "react";
 import { Grid, Container, Segment, Button, Dropdown } from "semantic-ui-react";
 import { statusOptions } from "../../constants/api";
 
-const SupplierDetails = ({ id }) => {
+const SupplierDetails = ({ supply, id }) => {
+  console.log("supply", supply);
   return (
     <Container>
       <Grid columns={1} divided="vertically">
@@ -10,7 +11,7 @@ const SupplierDetails = ({ id }) => {
         <Grid.Row stretched>
           <Grid.Column>
             <Segment>
-              <p class="ui blue right ribbon label">Requisition Details</p>
+              <p className="ui blue right ribbon label">Requisition Details</p>
               <p>Item Name : Kitenge Skirt </p>
               <p>Quantity Requested: 10 </p>
               <p>Requested by : Wabomba Kenen </p>
