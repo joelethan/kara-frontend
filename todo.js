@@ -5,3 +5,6 @@
 // Tracking Sales....not yet
 // editting....half
 // planner....not yet
+
+// passwordxy
+// admin@gmail.com

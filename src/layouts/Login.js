@@ -34,7 +34,7 @@ const LoginForm = ({
                 placeholder="Password"
                 type="password"
                 name="password"
-                value={form.password || "passwordxy"}
+                value={form.password || ""}
                 onChange={onChange}
               />
 
