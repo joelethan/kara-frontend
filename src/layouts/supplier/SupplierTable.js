@@ -12,6 +12,7 @@ import { Modal } from "react-bootstrap";
 import { GlobalContext } from "../../context/Provider";
 import SupplierDetails from "./SupplierDetails";
 import NewSupplier from "./NewSupplier";
+import { primaryColor } from "../../constants/api";
 
 function SupplierTable() {
   const {
@@ -75,7 +76,11 @@ function SupplierTable() {
           </Button>
         </Menu.Item> */}
         <Menu.Item>
-          <Button primary onClick={handleShowNew}>
+          <Button
+            primary
+            onClick={handleShowNew}
+            style={{ backgroundColor: primaryColor }}
+          >
             Receive Stock
           </Button>
         </Menu.Item>
@@ -113,7 +118,7 @@ function SupplierTable() {
           </Placeholder>
         ) : (
           <>
-            <Table selectable striped unstackable color="blue" size="small">
+            <Table selectable striped unstackable color="brown" size="small">
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Customer Name</Table.HeaderCell>

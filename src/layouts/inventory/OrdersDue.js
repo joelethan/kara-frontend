@@ -118,7 +118,7 @@ const OrdersDue = ({ orderInit, Id }) => {
           </Modal.Footer>
         </Modal>
 
-        <Table unstackable color="blue">
+        <Table unstackable color="brown">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Customer Name</Table.HeaderCell>

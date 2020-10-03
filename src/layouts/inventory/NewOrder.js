@@ -121,7 +121,7 @@ const NewOrder = ({ close, Id }) => {
           </Form.Group>
 
           {showItem && (
-            <Table unstackable singleLine size="small">
+            <Table unstackable color="brown" singleLine size="small">
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>SNo</Table.HeaderCell>

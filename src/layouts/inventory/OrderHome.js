@@ -4,7 +4,7 @@ import DataTable from "../DataTable";
 import OrderTable from "./OrderTable";
 import Tracker from "./Tracker";
 
-const color = "blue";
+const color = "brown";
 const OrderHome = ({ orderInit, itemId }) => (
   <Tab
     menu={{ color, inverted: true, attached: false, tabular: false }}

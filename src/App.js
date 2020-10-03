@@ -4,13 +4,14 @@ import {
   Switch,
   Route,
   useHistory,
+  Redirect,
 } from "react-router-dom";
 import routes from "./routes";
-import { GlobalProvider, GlobalContext } from "./context/Provider";
 import hasToken from "./utils/hasToken";
-import getMeasurements from "./context/actions/users/getMeasurements";
 import getUsers from "./context/actions/users/getUsers";
 import getSupply from "./context/actions/users/getSupply";
+import { GlobalProvider, GlobalContext } from "./context/Provider";
+import getMeasurements from "./context/actions/users/getMeasurements";
 
 const RenderRoute = (route) => {
   const history = useHistory();
@@ -46,6 +47,7 @@ function App() {
           {routes.map((route, index) => (
             <RenderRoute {...route} key={index} />
           ))}
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>
     </GlobalProvider>

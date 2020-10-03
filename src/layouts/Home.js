@@ -30,7 +30,7 @@ const panes = [
     ),
   },
 ];
-const color = "blue";
+const color = "brown";
 const HomeComponent = () => (
   <Tab
     menu={{ color, inverted: true, attached: false, tabular: false }}

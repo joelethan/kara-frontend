@@ -5,6 +5,7 @@ import { Input, Menu, Button } from "semantic-ui-react";
 import createClient from "../context/actions/users/createClient";
 import { GlobalContext } from "../context/Provider";
 import MyTable from "./del/MyTable";
+import { primaryColor } from "../constants/api";
 
 function ModalExample() {
   const [show, setShow] = useState(false);
@@ -48,7 +49,11 @@ function ModalExample() {
     <>
       <Menu secondary>
         <Menu.Item>
-          <Button primary onClick={handleShow}>
+          <Button
+            primary
+            onClick={handleShow}
+            style={{ backgroundColor: primaryColor }}
+          >
             New Customer
           </Button>
         </Menu.Item>

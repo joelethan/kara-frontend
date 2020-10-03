@@ -109,7 +109,7 @@ const SupplierDetails = ({ item }) => {
             /> */}
           </Form.Group>
 
-          <Table unstackable singleLine size="small">
+          <Table unstackable singleLine color="brown" size="small">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>SNo</Table.HeaderCell>

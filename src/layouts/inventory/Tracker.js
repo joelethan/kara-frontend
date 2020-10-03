@@ -33,7 +33,7 @@ const Tracker = ({ dip = [], output1 = [], output2 = [], output3 = [] }) => {
   // console.log("output3", Object.values(data));
 
   return (
-    <Table unstackable singleLine size="small">
+    <Table unstackable singleLine size="small" color="brown">
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>SNo</Table.HeaderCell>

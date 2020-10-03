@@ -67,7 +67,7 @@ function MyTable({ searchText }) {
         </Placeholder>
       ) : (
         <>
-          <Table selectable striped unstackable color="blue" size="small">
+          <Table selectable striped unstackable color="brown" size="small">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Customer Name</Table.HeaderCell>

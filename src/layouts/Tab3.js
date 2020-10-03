@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/Provider";
 import TeamTable from "./team/TeamTable";
 import NewMember from "./team/NewMember";
 import { Modal } from "react-bootstrap";
+import { primaryColor } from "../constants/api";
 
 const Tab3 = () => {
   const [show, setShow] = useState(false);
@@ -21,7 +22,11 @@ const Tab3 = () => {
     <>
       <Menu secondary>
         <Menu.Item>
-          <Button primary onClick={handleShow}>
+          <Button
+            primary
+            onClick={handleShow}
+            style={{ backgroundColor: primaryColor }}
+          >
             New Member
           </Button>
         </Menu.Item>
