@@ -34,7 +34,7 @@ const RenderRoute = (route) => {
     <Route
       path={route.path}
       render={(props) => <route.component {...props} />}
-      exact
+      // exact
     ></Route>
   );
 };
@@ -47,7 +47,7 @@ function App() {
           {routes.map((route, index) => (
             <RenderRoute {...route} key={index} />
           ))}
-          <Route render={() => <Redirect to="/" />} />
+          <Route render={() => <Redirect to="/home" />} />
         </Switch>
       </Router>
     </GlobalProvider>
