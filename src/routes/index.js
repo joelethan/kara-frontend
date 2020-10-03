@@ -1,7 +1,7 @@
 import Page1 from "../layouts/Page1";
 import LoginContainer from "../containers/LoginContainer";
 import OrderContainer from "../containers/OrderContainer";
-import ReceiptContainer from "../containers/ReceiptContainer";
+import OrdersDue from "../layouts/inventory/OrdersDue";
 
 const routes = [
   {
@@ -23,8 +23,8 @@ const routes = [
     protected: true,
   },
   {
-    path: "/re",
-    component: ReceiptContainer,
+    path: "/due",
+    component: OrdersDue,
     title: "Users",
     protected: true,
   },

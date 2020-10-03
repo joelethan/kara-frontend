@@ -11,7 +11,7 @@ export default () => (dispatch) => {
   axiosInstance()
     .get("/supply/all")
     .then((res) => {
-      dispatch({ type: GET_SUPPLY_SUCCESS, payload: res.data });
+      dispatch({ type: GET_SUPPLY_SUCCESS, payload: res.data.reverse() });
     })
     .catch((err) => {
       dispatch({

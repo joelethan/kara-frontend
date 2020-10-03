@@ -53,7 +53,7 @@ function ModalExample() {
           </Button>
         </Menu.Item>
         <Menu.Item position="right">
-          <Input icon="search" placeholder="Search ..." onChange={onSearch} />
+          <Input icon="search" placeholder="search..." onChange={onSearch} />
         </Menu.Item>
       </Menu>
 

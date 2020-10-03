@@ -2,6 +2,7 @@ import React from "react";
 import { Tab } from "semantic-ui-react";
 import DataTable from "../DataTable";
 import OrderTable from "./OrderTable";
+import Tracker from "./Tracker";
 
 const color = "blue";
 const OrderHome = ({ orderInit, itemId }) => (
@@ -18,7 +19,11 @@ const OrderHome = ({ orderInit, itemId }) => (
       },
       {
         menuItem: "Inventory",
-        render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>,
+        render: () => (
+          <Tab.Pane attached={false}>
+            <Tracker />
+          </Tab.Pane>
+        ),
       },
       {
         menuItem: "Clients",

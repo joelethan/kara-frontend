@@ -1,6 +1,7 @@
 export default {
   users: {
     loading: false,
+    loadin: false,
     error: null,
     data: [],
     measurements: [],

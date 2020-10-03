@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Image,
-  Segment,
-  Header,
-  Message,
-} from "semantic-ui-react";
-import logo from "../logo.svg";
+import logo from "../logo.png";
+import { Button, Form, Grid, Image, Segment, Message } from "semantic-ui-react";
 
 const LoginForm = ({
   form: { onChange, form, loginFormValid, onSubmit, loading, error },
@@ -21,10 +13,7 @@ const LoginForm = ({
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Image src={logo} size="small" centered />
-          <Header as="h2" color="teal" textAlign="center">
-            Login to your account
-          </Header>
+          <Image src={logo} centered />
           <Form size="large">
             <Segment stacked>
               {error && <Message negative content={"Invalid credentials"} />}
@@ -50,6 +39,7 @@ const LoginForm = ({
               />
 
               <Button
+                style={{ backgroundColor: "rgb(169 143 47)", color: "white" }}
                 onClick={onSubmit}
                 disabled={!loginFormValid || loading}
                 color="teal"

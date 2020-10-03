@@ -3,6 +3,7 @@ import { Table, Container, Placeholder } from "semantic-ui-react";
 import Pagination from "../../helpers/Pagination";
 import { Modal } from "react-bootstrap";
 import MemberDetails from "./MemberDetails";
+import { primaryColor } from "../../constants/api";
 
 function TeamTable({
   state: {
@@ -66,7 +67,7 @@ function TeamTable({
           </Placeholder.Paragraph>
         </Placeholder>
       ) : (
-        <Table selectable striped unstackable color="blue" size="small">
+        <Table selectable striped unstackable color="brown" size="small">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Customer Name</Table.HeaderCell>

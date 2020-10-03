@@ -16,7 +16,7 @@ import NewSupplier from "./NewSupplier";
 function SupplierTable() {
   const {
     usersState: {
-      users: { loading, data, supply },
+      users: { loading, supply },
     },
   } = useContext(GlobalContext);
 
@@ -36,22 +36,24 @@ function SupplierTable() {
   const handleShowNew = () => setShowNew(true);
   const handleCloseNew = () => setShowNew(false);
 
-  // Choosing the User with role supplier
-  let supplier = data.filter((item) => item.role === "supplier");
-
   // Searched Suppliers
-  const foundClients = supplier.filter((item) => {
+  const foundItems = supply.filter((item) => {
     return (
-      item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
-      item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
-      item.address.toLowerCase().search(searchText.toLowerCase()) !== -1
+      item.nameOfSupplier.toLowerCase().search(searchText.toLowerCase()) !==
+        -1 ||
+      item.status.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
+      item.email.toLowerCase().search(searchText.toLowerCase()) !== -1
     );
   });
+
+  const getSupply = (id) => {
+    return foundItems.find((item) => item._id === id);
+  };
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = foundClients.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = foundItems.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change Page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -67,11 +69,11 @@ function SupplierTable() {
   return (
     <>
       <Menu secondary>
-        <Menu.Item>
+        {/* <Menu.Item>
           <Button primary onClick={handleShowNew}>
             New Supplier
           </Button>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item>
           <Button primary onClick={handleShowNew}>
             Receive Stock
@@ -86,6 +88,7 @@ function SupplierTable() {
         size="lg"
         show={showNew}
         onHide={handleCloseNew}
+        backdrop="static"
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -102,53 +105,54 @@ function SupplierTable() {
           <Placeholder>
             <Placeholder.Header image>
               <Placeholder.Line />
-              <Placeholder.Line />
             </Placeholder.Header>
             <Placeholder.Paragraph>
-              <Placeholder.Line />
-              <Placeholder.Line />
               <Placeholder.Line />
               <Placeholder.Line />
             </Placeholder.Paragraph>
           </Placeholder>
         ) : (
-          <Table selectable striped unstackable color="blue" size="small">
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Customer Name</Table.HeaderCell>
-                <Table.HeaderCell>Physical Address</Table.HeaderCell>
-                <Table.HeaderCell>Email Address</Table.HeaderCell>
-                <Table.HeaderCell>Contact Number</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
+          <>
+            <Table selectable striped unstackable color="blue" size="small">
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Customer Name</Table.HeaderCell>
+                  <Table.HeaderCell>Physical Address</Table.HeaderCell>
+                  <Table.HeaderCell>Email Address</Table.HeaderCell>
+                  <Table.HeaderCell>Contact Number</Table.HeaderCell>
+                  <Table.HeaderCell>Status</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
 
-            <Table.Body>
-              {!!foundClients.length &&
-                currentPosts.map((element) => (
-                  <Table.Row
-                    onClick={() => {
-                      onClick(element._id);
-                      setItemId(element._id);
-                      handleShowDt();
-                    }}
-                    key={element._id + "supplier"}
-                  >
-                    <Table.Cell>
-                      {element.firstName} {element.lastName}
-                    </Table.Cell>
-                    <Table.Cell>{element.address}</Table.Cell>
-                    <Table.Cell>{element.email}</Table.Cell>
-                    <Table.Cell>{element.contact}</Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
+              <Table.Body>
+                {!!foundItems.length &&
+                  currentPosts.map((element) => {
+                    return (
+                      <Table.Row
+                        onClick={() => {
+                          onClick(element._id);
+                          setItemId(element._id);
+                          handleShowDt();
+                        }}
+                        key={element._id + "supplier"}
+                      >
+                        <Table.Cell>{element.nameOfSupplier}</Table.Cell>
+                        <Table.Cell>{element.address}</Table.Cell>
+                        <Table.Cell>{element.email}</Table.Cell>
+                        <Table.Cell>{element.contact}</Table.Cell>
+                        <Table.Cell>{element.status}</Table.Cell>
+                      </Table.Row>
+                    );
+                  })}
+              </Table.Body>
+            </Table>
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={foundItems.length}
+              paginate={paginate}
+            />
+          </>
         )}
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={foundClients.length}
-          paginate={paginate}
-        />
 
         <Modal
           size="lg"
@@ -162,7 +166,7 @@ function SupplierTable() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SupplierDetails supply={supply} id={itemId} />
+            <SupplierDetails item={getSupply(itemId)} />
           </Modal.Body>
         </Modal>
       </Container>

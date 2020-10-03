@@ -16,6 +16,11 @@ import {
   ADD_ORDER_LOADING,
   UPDATE_ORDER_LOADING,
   UPDATE_ORDER_SUCCESS,
+  UPDATE_SUPPLY_LOADING,
+  UPDATE_SUPPLY_SUCCESS,
+  UPDATE_SUPPLY_ERROR,
+  CREATE_SUPPLY_LOADING,
+  CREATE_SUPPLY_SUCCESS,
 } from "../../constants/actionTypes";
 
 const users = (state, { payload, type }) => {
@@ -207,6 +212,57 @@ const users = (state, { payload, type }) => {
             ...[...state.orders.data].filter((obj) => obj._id !== payload._id),
           ],
           // data: removeItemById(state.orders.data, payload._id),
+        },
+      };
+
+    // Updating an Order
+    case UPDATE_SUPPLY_LOADING:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: true,
+        },
+      };
+
+    case UPDATE_SUPPLY_SUCCESS:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+          supply: [
+            payload,
+            ...[...state.users.supply].filter((obj) => obj._id !== payload._id),
+          ],
+        },
+      };
+
+    case UPDATE_SUPPLY_ERROR:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+        },
+      };
+
+    case CREATE_SUPPLY_LOADING:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: true,
+        },
+      };
+
+    case CREATE_SUPPLY_SUCCESS:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+          supply: [payload, ...state.users.supply],
         },
       };
 

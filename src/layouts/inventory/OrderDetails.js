@@ -34,7 +34,7 @@ const OrderDetails = ({ setReceipt, item }) => {
         <Container>
           <Form.Group widths="equal">
             <Form.Input
-              value={item.clientName}
+              value={item ? item.clientName : "client" || ""}
               label="Customer Name"
               fluid
               readOnly
@@ -44,13 +44,17 @@ const OrderDetails = ({ setReceipt, item }) => {
               name="assignedTailor"
               label="Assigned Taylor"
               readOnly={!edit}
-              value={form.assignedTailor || item.assignedTailor}
+              value={
+                form.assignedTailor || item
+                  ? item.assignedTailor
+                  : "taylor" || ""
+              }
               onChange={onChange}
             />
             <Form.Field
               name="status"
               // disabled
-              value={form["status"] || item.status}
+              value={form["status"] || item ? item.status : "status" || ""}
               control={Select}
               options={statusOptions}
               label={{
@@ -71,7 +75,9 @@ const OrderDetails = ({ setReceipt, item }) => {
               fluid
               label="Order Date"
               value={
-                form["orderDate"] || moment(item.orderDate).format("YYYY-MM-DD")
+                form.orderDate || item
+                  ? moment(item.orderDate).format("YYYY-MM-DD")
+                  : "fr"
               }
               placeholder="Order Date"
               onChange={onChange}
@@ -83,7 +89,9 @@ const OrderDetails = ({ setReceipt, item }) => {
               name="dueDate"
               label="Expected Delivery Date"
               value={
-                form["dueDate"] || moment(item.dueDate).format("YYYY-MM-DD")
+                form.dueDate || item
+                  ? moment(item.dueDate).format("YYYY-MM-DD")
+                  : "fr"
               }
               placeholder="Expected Delivery Date"
               onChange={onChange}

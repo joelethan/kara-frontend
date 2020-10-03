@@ -12,9 +12,14 @@ export const roleOptions = [
 ];
 
 export const statusOptions = [
-  { key: 1, text: "Pending", value: "pending" },
-  { key: 2, text: "Under Review", value: "review" },
-  { key: 3, text: "Completed", value: "completed" },
+  { key: 1, text: "Pending", value: "Pending" },
+  { key: 2, text: "Under Review", value: "Under Review" },
+  { key: 3, text: "Completed", value: "Completed" },
+];
+
+export const supplyOptions = [
+  { key: 1, text: "Closed", value: "Closed" },
+  { key: 3, text: "Completed", value: "Completed" },
 ];
 
 export const orderOptions = [
@@ -33,82 +38,4 @@ export const categoryOptions = [
   { key: "westAfrican", text: "West African", value: "westAfrican" },
 ];
 
-export const invoice = {
-  id: "5df3180a09ea16dc4b95f910",
-  invoice_no: "001",
-  balance: "$2,283.74",
-  company: "Katusiime Joel Ethan",
-  email: "joelkatsime@gmail.com",
-  phone: "+256 750 426700",
-  address: "Somewhere in Kampala",
-  trans_date: "2020-09-3",
-  due_date: "2020-09-10",
-  items: [
-    {
-      sno: 1,
-      desc: "blue west african pants",
-      qty: 5,
-      rate: 50000,
-    },
-    {
-      sno: 2,
-      desc: "jackets",
-      qty: 2,
-      rate: 100000,
-    },
-    {
-      sno: 3,
-      desc: "trousers west african fabric",
-      qty: 1,
-      rate: 85000,
-    },
-    {
-      sno: 4,
-      desc: "t shirt",
-      qty: 10,
-      rate: 25000,
-    },
-    {
-      sno: 5,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 6,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 7,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 8,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 9,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 10,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-    {
-      sno: 11,
-      desc: "african craft sandals",
-      qty: 4,
-      rate: 35000,
-    },
-  ],
-};
+export const primaryColor = "#c8b56f";
