@@ -3,7 +3,6 @@ import { Table, Container, Placeholder } from "semantic-ui-react";
 import Pagination from "../../helpers/Pagination";
 import { Modal } from "react-bootstrap";
 import MemberDetails from "./MemberDetails";
-import { primaryColor } from "../../constants/api";
 
 function TeamTable({
   state: {
