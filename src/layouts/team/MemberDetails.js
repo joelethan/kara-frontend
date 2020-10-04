@@ -8,6 +8,7 @@ import {
   Label,
   Checkbox,
 } from "semantic-ui-react";
+import { primaryColor } from "../../constants/api";
 
 const MemberDetails = ({ staff, id }) => {
   const item = staff.find((item) => item._id === id);
@@ -18,7 +19,10 @@ const MemberDetails = ({ staff, id }) => {
       <Grid columns={2}>
         <GridColumn>
           <Segment>
-            <Label style={{ marginBottom: "1rem" }} color="blue" ribbon>
+            <Label
+              style={{ marginBottom: "1rem", backgroundColor: primaryColor }}
+              ribbon
+            >
               Bio Information
             </Label>
             <p>
@@ -28,7 +32,10 @@ const MemberDetails = ({ staff, id }) => {
             <p>Role : {item.role} </p>
           </Segment>
           <Segment>
-            <Label style={{ marginBottom: "1rem" }} color="blue" ribbon>
+            <Label
+              style={{ marginBottom: "1rem", backgroundColor: primaryColor }}
+              ribbon
+            >
               Contact Details
             </Label>
             <p>Email : {item.email} </p>
@@ -39,7 +46,10 @@ const MemberDetails = ({ staff, id }) => {
 
         <GridColumn>
           <Segment>
-            <Label style={{ marginBottom: "1rem" }} color="blue" ribbon>
+            <Label
+              style={{ marginBottom: "1rem", backgroundColor: primaryColor }}
+              ribbon
+            >
               Member Status
             </Label>
             <br />
@@ -54,7 +64,10 @@ const MemberDetails = ({ staff, id }) => {
             />
           </Segment>
           <Segment>
-            <Label style={{ marginBottom: "1rem" }} color="blue" ribbon>
+            <Label
+              style={{ marginBottom: "1rem", backgroundColor: primaryColor }}
+              ribbon
+            >
               Next of Kin
             </Label>
             <p>Name : {item.nextOfKinName} </p>

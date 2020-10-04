@@ -128,7 +128,9 @@ const SupplierDetails = ({ item }) => {
                   </Table.Cell>
                   <Table.Cell>{_item.itemName}</Table.Cell>
                   <Table.Cell>{_item.quantity}</Table.Cell>
-                  <Table.Cell>{_item.unitCost.toLocaleString()}</Table.Cell>
+                  <Table.Cell>
+                    {_item.unitCost ? _item.unitCost.toLocaleString() : 0}
+                  </Table.Cell>
                   <Table.Cell>
                     {(_item.quantity * _item.unitCost).toLocaleString()}
                   </Table.Cell>

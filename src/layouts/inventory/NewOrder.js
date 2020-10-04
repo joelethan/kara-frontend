@@ -204,9 +204,6 @@ const NewOrder = ({ close, Id }) => {
               onChange={onChange}
             />
           </Form.Group>
-          <Button floated="right" className="primary">
-            Add Order
-          </Button>
           <Button
             onClick={onSubmit}
             loading={loading}
@@ -218,8 +215,9 @@ const NewOrder = ({ close, Id }) => {
             floated="right"
             className="ui negative primary button"
           >
-            Cancel
+            Add Order
           </Button>
+          <Button floated="right">Cancel</Button>
         </Container>
       </Form>
     </>

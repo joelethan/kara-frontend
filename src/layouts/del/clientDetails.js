@@ -3,6 +3,7 @@ import { Button, Form, Grid, Header, Segment, Input } from "semantic-ui-react";
 import { Container } from "react-bootstrap";
 import { GlobalContext } from "../../context/Provider";
 import { Link } from "react-router-dom";
+import { primaryColor } from "../../constants/api";
 
 function CustomerDetails({ itemId }) {
   const {
@@ -27,7 +28,11 @@ function CustomerDetails({ itemId }) {
           <Grid.Row stretched>
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Contact Information
                 </Header>
                 Customer Name :{" "}
@@ -83,7 +88,11 @@ function CustomerDetails({ itemId }) {
 
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Top Measurements
                 </Header>
                 <p>
@@ -240,7 +249,11 @@ function CustomerDetails({ itemId }) {
 
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Top Measurements Continued...
                 </Header>
                 <p>
@@ -426,7 +439,11 @@ function CustomerDetails({ itemId }) {
           <Grid.Row stretched>
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Sleeves
                 </Header>
                 <p>
@@ -544,7 +561,11 @@ function CustomerDetails({ itemId }) {
 
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Trouser Measurements
                 </Header>
                 <p>
@@ -684,7 +705,11 @@ function CustomerDetails({ itemId }) {
 
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Dress Measurements
                 </Header>
                 <p>
@@ -759,7 +784,11 @@ function CustomerDetails({ itemId }) {
           <Grid.Row stretched>
             <Grid.Column>
               <Segment>
-                <Header as="h4" className="ui blue ribbon label">
+                <Header
+                  as="h4"
+                  style={{ backgroundColor: primaryColor }}
+                  className="ui ribbon label"
+                >
                   Skirt
                 </Header>
                 <p>
