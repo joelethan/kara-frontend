@@ -21,6 +21,9 @@ import {
   UPDATE_SUPPLY_ERROR,
   CREATE_SUPPLY_LOADING,
   CREATE_SUPPLY_SUCCESS,
+  UPDATE_MEASUREMENTS_SUCCESS,
+  UPDATE_MEASUREMENTS_LOADING,
+  UPDATE_MEASUREMENTS_ERROR,
 } from "../../constants/actionTypes";
 
 const users = (state, { payload, type }) => {
@@ -263,6 +266,39 @@ const users = (state, { payload, type }) => {
           ...state.users,
           loadin: false,
           supply: [payload, ...state.users.supply],
+        },
+      };
+
+    case UPDATE_MEASUREMENTS_SUCCESS:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+          measurements: [
+            payload,
+            ...[...state.users.measurements].filter(
+              (obj) => obj._id !== payload._id
+            ),
+          ],
+        },
+      };
+
+    case UPDATE_MEASUREMENTS_LOADING:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: true,
+        },
+      };
+
+    case UPDATE_MEASUREMENTS_ERROR:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
         },
       };
 

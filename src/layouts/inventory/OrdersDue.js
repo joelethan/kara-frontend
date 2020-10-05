@@ -199,11 +199,7 @@ const OrdersDue = ({ orderInit, Id }) => {
           onHide={() => setReShow(false)}
           aria-labelledby="example-modal-sizes-title-lg"
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">
-              Large Modal
-            </Modal.Title>
-          </Modal.Header>
+          <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
             <ReceiptContainer details={receiptData} />
           </Modal.Body>

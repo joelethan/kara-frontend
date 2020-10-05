@@ -70,11 +70,6 @@ function SupplierTable() {
   return (
     <>
       <Menu secondary>
-        {/* <Menu.Item>
-          <Button primary onClick={handleShowNew}>
-            New Supplier
-          </Button>
-        </Menu.Item> */}
         <Menu.Item>
           <Button
             primary
@@ -98,7 +93,7 @@ function SupplierTable() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
+            Supplier Infomation
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -167,7 +162,7 @@ function SupplierTable() {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-              Large Modal
+              Supplier Details
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

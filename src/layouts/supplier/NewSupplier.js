@@ -88,7 +88,6 @@ const NewSupplier = () => {
             marginBottom: "1rem",
           }}
         >
-          <Header>Supplier Info</Header>
           <Card fluid>
             <Card.Content>
               <Form>

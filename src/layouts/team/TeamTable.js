@@ -112,7 +112,7 @@ function TeamTable({
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
+            Member Details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

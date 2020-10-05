@@ -4,21 +4,34 @@ import { Container } from "react-bootstrap";
 import { GlobalContext } from "../../context/Provider";
 import { Link } from "react-router-dom";
 import { primaryColor } from "../../constants/api";
+import updateMeasurements from "../../context/actions/users/updateMeasurements";
 
+// usersDispatch
 function CustomerDetails({ itemId }) {
   const {
+    usersDispatch,
     usersState: {
-      users: { measurements },
+      users: { measurements, loadin },
     },
   } = useContext(GlobalContext);
 
   const [form, setForm] = useState({});
+  const [edit, setEdit] = useState(true);
 
   let user = itemId;
   let measurement = measurements.find((item) => item.clientName === itemId._id);
 
+  const sendData = () => {
+    console.log("measurement", measurement);
+    updateMeasurements({ form, Id: measurement._id })(usersDispatch);
+  };
+
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
+  };
+
+  const toggleEdit = () => {
+    setEdit(!edit);
   };
 
   return (
@@ -104,6 +117,7 @@ function CustomerDetails({ itemId }) {
                     size="mini"
                     transparent
                     placeholder="......"
+                    readOnly={edit}
                     value={
                       form["shoulder"] === ""
                         ? ""
@@ -121,6 +135,7 @@ function CustomerDetails({ itemId }) {
                     transparent
                     name="upperBust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["upperBust"] === ""
                         ? ""
@@ -138,6 +153,7 @@ function CustomerDetails({ itemId }) {
                     placeholder="......"
                     name="bust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["bust"] === ""
                         ? ""
@@ -154,6 +170,7 @@ function CustomerDetails({ itemId }) {
                     placeholder="......"
                     name="lowerBust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["lowerBust"] === ""
                         ? ""
@@ -174,6 +191,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="waist"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["waist"] === ""
                         ? ""
@@ -195,6 +213,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="lowerWaist"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["lowerWaist"] === ""
                         ? ""
@@ -215,6 +234,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="hips"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["hips"] === ""
                         ? ""
@@ -236,6 +256,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToUpperBust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToUpperBust"] === ""
                         ? ""
@@ -270,6 +291,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToBust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToBust"] === ""
                         ? ""
@@ -292,6 +314,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToLowerBust"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToLowerBust"] === ""
                         ? ""
@@ -314,6 +337,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToWaist"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToWaist"] === ""
                         ? ""
@@ -336,6 +360,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToLowerWaist"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToLowerWaist"] === ""
                         ? ""
@@ -358,6 +383,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shoulderToHips"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shoulderToHips"] === ""
                         ? ""
@@ -380,6 +406,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="topFullLength"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["topFullLength"] === ""
                         ? ""
@@ -402,6 +429,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="bodiceCut"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["bodiceCut"] === ""
                         ? ""
@@ -424,6 +452,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="waistCut"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["waistCut"] === ""
                         ? ""
@@ -460,6 +489,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shortSleeve"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shortSleeve"] === ""
                         ? ""
@@ -482,6 +512,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="threeQuarterSleeve"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["threeQuarterSleeve"] === ""
                         ? ""
@@ -504,6 +535,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="fullLengthSleeve"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["fullLengthSleeve"] === ""
                         ? ""
@@ -526,6 +558,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="capSleeve"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["capSleeve"] === ""
                         ? ""
@@ -548,6 +581,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="circumferenceSleeve"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["circumferenceSleeve"] === ""
                         ? ""
@@ -582,6 +616,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="trouserWaist"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["trouserWaist"] === ""
                         ? ""
@@ -604,6 +639,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="trouserHips"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["trouserHips"] === ""
                         ? ""
@@ -626,6 +662,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="trouserThigh"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["trouserThigh"] === ""
                         ? ""
@@ -648,6 +685,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="trouserFly"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["trouserFly"] === ""
                         ? ""
@@ -670,6 +708,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="trouserLength"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["trouserLength"] === ""
                         ? ""
@@ -691,6 +730,7 @@ function CustomerDetails({ itemId }) {
                     //     : ""
                     // }
                     name="trouserBottomWidth"
+                    readOnly={edit}
                     onChange={onChange}
                     value={
                       form["trouserBottomWidth"] === ""
@@ -726,6 +766,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="longDressFull"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["longDressFull"] === ""
                         ? ""
@@ -748,6 +789,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shortDressFull"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shortDressFull"] === ""
                         ? ""
@@ -770,6 +812,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="circumferenceDress"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["circumferenceDress"] === ""
                         ? ""
@@ -805,6 +848,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="longSkirtFull"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["longSkirtFull"] === ""
                         ? ""
@@ -827,6 +871,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="shortSkirtFull"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["shortSkirtFull"] === ""
                         ? ""
@@ -849,6 +894,7 @@ function CustomerDetails({ itemId }) {
                     // }
                     name="skirtSlitLength"
                     onChange={onChange}
+                    readOnly={edit}
                     value={
                       form["skirtSlitLength"] === ""
                         ? ""
@@ -863,23 +909,36 @@ function CustomerDetails({ itemId }) {
         </Grid>
       </Container>
 
-      <Button
-        primary
-        floated="right"
-        style={{ marginBottom: "1rem" }}
-        content="Save"
-        icon="save"
-        labelPosition="right"
-      />
+      {!edit && (
+        <Button
+          primary
+          floated="right"
+          style={{ marginBottom: "1rem" }}
+          content="Save"
+          icon="save"
+          loading={loadin}
+          disabled={loadin}
+          labelPosition="right"
+          onClick={() => {
+            toggleEdit();
+            sendData();
+          }}
+        />
+      )}
 
-      <Button
-        primary
-        floated="right"
-        content="Edit"
-        icon="edit"
-        style={{ marginBottom: "1rem" }}
-        labelPosition="right"
-      />
+      {edit && (
+        <Button
+          primary
+          floated="right"
+          loading={loadin}
+          disabled={loadin}
+          content="Edit"
+          icon="edit"
+          style={{ marginBottom: "1rem" }}
+          labelPosition="right"
+          onClick={toggleEdit}
+        />
+      )}
 
       <Button
         as={Link}
