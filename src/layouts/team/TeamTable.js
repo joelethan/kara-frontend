@@ -116,7 +116,7 @@ function TeamTable({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MemberDetails staff={staff} id={itemId} />
+          <MemberDetails close={handleClose} staff={staff} id={itemId} />
         </Modal.Body>
       </Modal>
     </Container>
