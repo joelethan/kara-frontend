@@ -24,6 +24,9 @@ import {
   UPDATE_MEASUREMENTS_SUCCESS,
   UPDATE_MEASUREMENTS_LOADING,
   UPDATE_MEASUREMENTS_ERROR,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_LOADING,
+  UPDATE_USER_ERROR,
 } from "../../constants/actionTypes";
 
 const users = (state, { payload, type }) => {
@@ -294,6 +297,37 @@ const users = (state, { payload, type }) => {
       };
 
     case UPDATE_MEASUREMENTS_ERROR:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+        },
+      };
+
+    case UPDATE_USER_LOADING:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: true,
+        },
+      };
+
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        users: {
+          ...state.users,
+          loadin: false,
+          data: [
+            payload,
+            ...[...state.users.data].filter((obj) => obj._id !== payload._id),
+          ],
+        },
+      };
+
+    case UPDATE_USER_ERROR:
       return {
         ...state,
         users: {

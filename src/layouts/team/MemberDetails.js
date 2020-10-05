@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Button,
   GridColumn,
@@ -11,8 +11,17 @@ import {
   Form,
 } from "semantic-ui-react";
 import { primaryColor } from "../../constants/api";
+import updateUser from "../../context/actions/users/updateUser";
+import { GlobalContext } from "../../context/Provider";
 
 const MemberDetails = ({ close, staff, id }) => {
+  const {
+    usersDispatch,
+    usersState: {
+      users: { loadin },
+    },
+  } = useContext(GlobalContext);
+  console.log("loadin", loadin);
   const item = staff.find((item) => item._id === id);
 
   const [edit, setEdit] = useState(true);
@@ -29,12 +38,13 @@ const MemberDetails = ({ close, staff, id }) => {
 
   const handleClick = () => {
     setChecked(!checked);
-    setForm({ ...form, status: checked });
+    setForm({ ...form, active: checked });
   };
 
   let userStatus = checked ? "User is Active" : "User is In-Active";
 
   const onSubmit = () => {
+    updateUser({ form, Id: item._id })(usersDispatch);
     console.log("form", form);
   };
 
@@ -72,7 +82,9 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Email"
                   name="email"
-                  value={form["email"] || item.email}
+                  value={
+                    form["email"] === "" ? "" : form["email"] || item.email
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -84,7 +96,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Phone"
                   name="contact"
-                  value={form["contact"] || item.contact}
+                  value={
+                    form["contact"] === ""
+                      ? ""
+                      : form["contact"] || item.contact
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -96,7 +112,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Address"
                   name="address"
-                  value={form["address"] || item.address}
+                  value={
+                    form["address"] === ""
+                      ? ""
+                      : form["address"] || item.address
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -114,7 +134,6 @@ const MemberDetails = ({ close, staff, id }) => {
             </Label>
             <br />
             <Checkbox
-              name="status"
               checked={checked}
               style={{
                 transform: "scale(0.8)",
@@ -142,7 +161,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Name"
                   name="nextOfKinName"
-                  value={form["nextOfKinName"] || item.nextOfKinName}
+                  value={
+                    form["nextOfKinName"] === ""
+                      ? ""
+                      : form["nextOfKinName"] || item.nextOfKinName
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -154,7 +177,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Phone"
                   name="nextOfKinContact"
-                  value={form["nextOfKinContact"] || item.nextOfKinContact}
+                  value={
+                    form["nextOfKinContact"] === ""
+                      ? ""
+                      : form["nextOfKinContact"] || item.nextOfKinContact
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -166,7 +193,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Address"
                   name="nextOfKinAddress"
-                  value={form["nextOfKinAddress"] || item.nextOfKinAddress}
+                  value={
+                    form["nextOfKinAddress"] === ""
+                      ? ""
+                      : form["nextOfKinAddress"] || item.nextOfKinAddress
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -178,7 +209,11 @@ const MemberDetails = ({ close, staff, id }) => {
                   size="mini"
                   placeholder="Relationship"
                   name="nextOfKinRelation"
-                  value={form["nextOfKinRelation"] || item.nextOfKinRelation}
+                  value={
+                    form["nextOfKinRelation"] === ""
+                      ? ""
+                      : form["nextOfKinRelation"] || item.nextOfKinRelation
+                  }
                   onChange={onChange}
                 />
               </Form.Field>
@@ -192,6 +227,8 @@ const MemberDetails = ({ close, staff, id }) => {
           className="ui positive primary button"
           content="Edit"
           style={{ marginBottom: "1rem" }}
+          loading={loadin}
+          disabled={loadin}
           onClick={toggleEdit}
         />
       )}
@@ -201,6 +238,8 @@ const MemberDetails = ({ close, staff, id }) => {
           className="ui primary button"
           style={{ marginBottom: "1rem" }}
           content="Save"
+          loading={loadin}
+          disabled={loadin}
           onClick={() => {
             toggleEdit();
             onSubmit();
