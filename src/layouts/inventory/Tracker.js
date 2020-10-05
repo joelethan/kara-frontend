@@ -15,7 +15,7 @@ const Tracker = ({ dip = [], output1 = [], output2 = [], output3 = [] }) => {
 
   for (const elem of dip) {
     output1 = [...output1, elem.itemName];
-    output2 = [...output2, elem.quantity];
+    output2 = [...output2, elem.quantity && elem.unitCost ? elem.quantity : 0];
   }
 
   let data = output1.reduce((a, b, i) => {
@@ -26,11 +26,6 @@ const Tracker = ({ dip = [], output1 = [], output2 = [], output3 = [] }) => {
   for (const itm in data) {
     output3.push({ [itm]: data[itm] });
   }
-
-  // console.log("data", data);
-  // console.log("output1", output1);
-  // console.log("output2", output2);
-  // console.log("output3", Object.values(data));
 
   return (
     <Table unstackable singleLine size="small" color="brown">
