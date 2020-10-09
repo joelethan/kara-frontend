@@ -51,21 +51,30 @@ const OrderDetails = ({ setReceipt, item }) => {
               }
               onChange={onChange}
             />
-            <Form.Field
-              name="status"
-              // disabled
-              value={form["status"] || item ? item.status : "status" || ""}
-              control={Select}
-              options={statusOptions}
-              label={{
-                children: "Order Status",
-                htmlFor: "form-select-control-gender",
-              }}
-              placeholder="Order Status"
-              search
-              searchInput={{ id: "form-select-control-gender" }}
-              onChange={onChange}
-            />
+            {!edit && (
+              <Form.Input
+                fluid
+                label="Order Status"
+                readOnly={true}
+                value={item.status}
+              />
+            )}
+            {edit && (
+              <Form.Input
+                name="status"
+                value={form.status || item.status}
+                control={Select}
+                options={statusOptions}
+                label={{
+                  children: "Order Status",
+                  htmlFor: "form-select-control-gender",
+                }}
+                placeholder="Order Status"
+                search
+                searchInput={{ id: "form-select-control-gender" }}
+                onChange={onChange}
+              />
+            )}
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input

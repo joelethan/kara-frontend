@@ -2,24 +2,47 @@ import React, { useContext } from "react";
 import { Table } from "semantic-ui-react";
 import { GlobalContext } from "../../context/Provider";
 
-const Tracker = ({ dip = [], output1 = [], output2 = [], output3 = [] }) => {
+const Tracker = ({
+  dip_supply = [],
+  dip_order = [],
+  output1 = [],
+  output2 = [],
+  output3 = [],
+  order1 = [],
+  order2 = [],
+  order3 = [],
+}) => {
   const {
     usersState: {
       users: { supply },
+      orders: { data: orders },
     },
   } = useContext(GlobalContext);
 
-  for (const i of supply) {
-    dip.push(...i.supplyDetails);
+  let completedOrders = orders.filter((item) => item.status === "Completed");
+
+  for (const i of completedOrders) {
+    dip_order.push(...i.orderDetails);
   }
 
-  for (const elem of dip) {
+  for (const i of supply) {
+    dip_supply.push(...i.supplyDetails);
+  }
+
+  for (const elem of dip_supply) {
     output1 = [...output1, elem.itemName];
     output2 = [...output2, elem.quantity && elem.unitCost ? elem.quantity : 0];
   }
 
-  let data = output1.reduce((a, b, i) => {
-    a[b] = a[b] ? a[b] + output2[i] : output2[i];
+  for (const elem of dip_order) {
+    order1 = [...order1, elem.item];
+    order2 = [...order2, elem.quantity && elem.unitCost ? -elem.quantity : 0];
+  }
+
+  let data = [...output1, ...order1].reduce((a, b, i) => {
+    a[b] = a[b]
+      ? a[b] + [...output2, ...order2][i]
+      : [...output2, ...order2][i];
     return a;
   }, {});
 

@@ -52,6 +52,17 @@ function Navbar() {
           </Button>
           <Button
             as={Link}
+            to="/home"
+            style={{
+              color: primaryColor,
+              backgroundColor: "transparent",
+              marginLeft: "1rem",
+            }}
+          >
+            Home
+          </Button>
+          <Button
+            as={Link}
             to="/inventory"
             style={{
               color: primaryColor,
@@ -59,7 +70,7 @@ function Navbar() {
               marginLeft: "1rem",
             }}
           >
-            Inventory
+            Sales
           </Button>
         </Menu.Item>
         <Menu.Menu position="right">

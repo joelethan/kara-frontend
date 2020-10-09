@@ -15,6 +15,7 @@ export const statusOptions = [
   { key: 1, text: "Pending", value: "Pending" },
   { key: 2, text: "Under Review", value: "Under Review" },
   { key: 3, text: "Completed", value: "Completed" },
+  { key: 4, text: "Closed", value: "Closed" },
 ];
 
 export const supplyOptions = [

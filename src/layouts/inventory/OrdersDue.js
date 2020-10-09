@@ -104,7 +104,9 @@ const OrdersDue = ({ orderInit, Id }) => {
           aria-labelledby="example-modal-sizes-title-lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">Title</Modal.Title>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              Order Details
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NewOrder close={handleCloseNew} Id={Id} />
@@ -142,13 +144,22 @@ const OrdersDue = ({ orderInit, Id }) => {
                       company: getOrdr(currentPosts, element._id).clientName,
                       email: getClient(
                         getOrdr(currentPosts, element._id).clientId
-                      ).email,
+                      )
+                        ? getClient(getOrdr(currentPosts, element._id).clientId)
+                            .email
+                        : "",
                       phone: getClient(
                         getOrdr(currentPosts, element._id).clientId
-                      ).contact,
+                      )
+                        ? getClient(getOrdr(currentPosts, element._id).clientId)
+                            .contact
+                        : "",
                       address: getClient(
                         getOrdr(currentPosts, element._id).clientId
-                      ).address,
+                      )
+                        ? getClient(getOrdr(currentPosts, element._id).clientId)
+                            .address
+                        : "",
                       trans_date: getOrdr(currentPosts, element._id).data,
                       due_date: getOrdr(currentPosts, element._id).data,
                       items: getOrdr(currentPosts, element._id).orderDetails,

@@ -31,18 +31,24 @@ const NewOrder = ({ close, Id }) => {
     for (const i of form.orderItems) {
       items = [
         ...items,
-        { item: i, quantity: form[i + "Qty"], unitCost: form[i + "Amount"] },
+        {
+          item: i,
+          quantity: form[i + "Qty"] && form[i + "Amount"] ? form[i + "Qty"] : 0,
+          unitCost:
+            form[i + "Qty"] && form[i + "Amount"] ? form[i + "Amount"] : 0,
+        },
       ];
     }
     let data = {
       orderDetails: items,
       assignedTailor: form["assignedTailor"],
-      orderDescription: form["orderDescription"],
-      orderDate: form["orderDate"],
-      dueDate: form["dueDate"],
+      orderDescription: form["orderDescription"] || "",
+      orderDate: form["orderDate"] || moment(Date.now()).format("YYYY-MM-DD"),
+      dueDate:
+        form["dueDate"] ||
+        moment(Date.now() + 14 * 86400000).format("YYYY-MM-DD"),
     };
     createOrder({ close, history, data, Id })(usersDispatch);
-    // close();
   };
 
   const onConfirm = () => {
@@ -217,7 +223,9 @@ const NewOrder = ({ close, Id }) => {
           >
             Add Order
           </Button>
-          <Button floated="right">Cancel</Button>
+          <Button disabled={true} floated="right">
+            Cancel
+          </Button>
         </Container>
       </Form>
     </>

@@ -4,10 +4,12 @@ import getOrder from "../../context/actions/users/getOrder";
 import { GlobalContext } from "../../context/Provider";
 import { Modal, Container } from "react-bootstrap";
 import Pagination from "../../helpers/Pagination";
-import { Table, Menu, Input } from "semantic-ui-react";
+import { Table, Menu, Input, Button } from "semantic-ui-react";
+import { primaryColor } from "../../constants/api";
 import OrderDetails from "./OrderDetails";
 import NewOrder from "./NewOrder";
 import moment from "moment";
+import NewSale from "./NewSale";
 
 const OrderTable = ({ orderInit, Id }) => {
   const {
@@ -37,6 +39,7 @@ const OrderTable = ({ orderInit, Id }) => {
   const [postsPerPage] = useState(5);
   const [show, setShow] = useState(false);
   const [showNew, setShowNew] = useState(!!orderInit);
+  const [newSale, setNewSale] = useState(false);
   const [reShow, setReShow] = useState(false);
   const [receiptData, setReceiptData] = useState({});
   const [searchText, setSearchText] = useState("");
@@ -62,6 +65,8 @@ const OrderTable = ({ orderInit, Id }) => {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
   // const handleShowNew = () => setShowNew(true);
+  const handleShowNewSale = () => setNewSale(true);
+  const handleCloseNewSale = () => setNewSale(false);
   const handleCloseNew = () => setShowNew(false);
 
   const onSearch = (e, { value }) => {
@@ -75,10 +80,35 @@ const OrderTable = ({ orderInit, Id }) => {
   return (
     <Container>
       <Menu secondary>
+        <Menu.Item position="left">
+          <Button
+            onClick={handleShowNewSale}
+            style={{ backgroundColor: primaryColor }}
+          >
+            Add Express Sale
+          </Button>
+        </Menu.Item>
         <Menu.Item position="right">
           <Input icon="search" placeholder="search..." onChange={onSearch} />
         </Menu.Item>
       </Menu>
+
+      <Modal
+        size="lg"
+        show={newSale}
+        onHide={handleCloseNewSale}
+        backdrop="static"
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Express Sale
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <NewSale close={handleCloseNewSale} Id={Id} />
+        </Modal.Body>
+      </Modal>
 
       <Modal
         size="lg"
@@ -88,18 +118,20 @@ const OrderTable = ({ orderInit, Id }) => {
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">Title</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Order Details
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <NewOrder close={handleCloseNew} Id={Id} />
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button className="ui negative primary button">Cancel</Button>
+        {/* <Modal.Footer>
+          <Button className="ui negative primary button">Cancel</Button>
 
           <Button className="primary" onClick={handleCloseNew}>
             Add Order
-          </Button> */}
-        </Modal.Footer>
+          </Button>
+        </Modal.Footer> */}
       </Modal>
 
       <Table unstackable color="brown">
@@ -126,13 +158,22 @@ const OrderTable = ({ orderInit, Id }) => {
                     company: getOrdr(currentPosts, element._id).clientName,
                     email: getClient(
                       getOrdr(currentPosts, element._id).clientId
-                    ).email,
+                    )
+                      ? getClient(getOrdr(currentPosts, element._id).clientId)
+                          .email
+                      : "",
                     phone: getClient(
                       getOrdr(currentPosts, element._id).clientId
-                    ).contact,
+                    )
+                      ? getClient(getOrdr(currentPosts, element._id).clientId)
+                          .contact
+                      : "",
                     address: getClient(
                       getOrdr(currentPosts, element._id).clientId
-                    ).address,
+                    )
+                      ? getClient(getOrdr(currentPosts, element._id).clientId)
+                          .address
+                      : "",
                     trans_date: getOrdr(currentPosts, element._id).data,
                     due_date: getOrdr(currentPosts, element._id).data,
                     items: getOrdr(currentPosts, element._id).orderDetails,

@@ -1,6 +1,5 @@
 import React from "react";
 import { Tab } from "semantic-ui-react";
-import DataTable from "../DataTable";
 import OrderTable from "./OrderTable";
 import Tracker from "./Tracker";
 
@@ -22,14 +21,6 @@ const OrderHome = ({ orderInit, itemId }) => (
         render: () => (
           <Tab.Pane attached={false}>
             <Tracker />
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: "Clients",
-        render: () => (
-          <Tab.Pane attached={false}>
-            <DataTable title={"Client"} />
           </Tab.Pane>
         ),
       },

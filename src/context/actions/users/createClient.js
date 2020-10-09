@@ -16,11 +16,11 @@ export default (data) => (dispatch) => {
       axiosInstance()
         .post("measurement/" + res.data._id, data)
         .then(() => {
-          data.setShow(false);
           dispatch({
             type: ADD_CLIENT_SUCCESS,
             payload: data,
           });
+          data.setShow(false);
         });
     })
     .catch((err) => {

@@ -79,15 +79,16 @@ const users = (state, { payload, type }) => {
       };
 
     case ADD_CLIENT_SUCCESS:
+      console.log("payload", payload);
       return {
         ...state,
-        addClient: {
-          ...state.addClient,
-          loading: false,
-          data: payload,
-          measurements: payload,
-          error: null,
-        },
+        // addClient: {
+        //   ...state.addClient,
+        //   loading: false,
+        //   data: payload,
+        //   measurements: payload,
+        //   error: null,
+        // },
         users: {
           ...state.users,
           loading: false,
