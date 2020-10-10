@@ -2,6 +2,7 @@
   "home": "http://joelethan.github.io/kara-frontend",
   "name": "kara-frontend",
   "version": "0.1.0",
+  "homepage": "https://karadesigns.co.ug",
   "private": true,
   "engines": {
     "node": "12.16.2",
@@ -26,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "front": "set PORT=8006 && react-scripts start",
+    "front": "set PORT=8008 && react-scripts start",
     "server": "cd .. && cd kara-backend && npm run server",
     "build": "react-scripts build",
     "test": "react-scripts test",
