@@ -14,11 +14,11 @@ import { orderOptions } from "../../constants/api";
 import createSale from "../../context/actions/users/createSale";
 import moment from "moment";
 
-const NewSale = () => {
+const NewSale = ({ close }) => {
   const {
     usersDispatch,
     usersState: {
-      users: { loadin },
+      orders: { loading },
     },
   } = useContext(GlobalContext);
   const [form, setForm] = useState({});
@@ -51,9 +51,7 @@ const NewSale = () => {
       status: "Completed",
     };
 
-    console.log("data", data);
-    createSale({ data })(usersDispatch);
-    // close();
+    createSale({ data, close })(usersDispatch);
   };
 
   let formValid = !(
@@ -198,18 +196,18 @@ const NewSale = () => {
                   </>
                 )}
                 <Button
-                  disabled={formValid || loadin}
+                  disabled={formValid || loading}
                   floated="right"
                   basic
                   primary
                   color="black"
                   onClick={onSubmit}
-                  loading={loadin}
+                  loading={loading}
                   icon
                   labelPosition="right"
                 >
-                  Submit
-                  <Icon name="right arrow" />
+                  Create
+                  <Icon name="paper plane" />
                 </Button>
               </Form>
             </Card.Content>

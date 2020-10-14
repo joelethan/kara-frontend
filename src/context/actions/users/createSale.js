@@ -6,7 +6,7 @@ import {
   ADD_ORDER_ERROR,
 } from "../../../constants/actionTypes";
 
-export default ({ data }) => (dispatch) => {
+export default ({ data, close }) => (dispatch) => {
   dispatch({
     type: ADD_ORDER_LOADING,
   });
@@ -14,12 +14,11 @@ export default ({ data }) => (dispatch) => {
   axiosInstance()
     .put("/order/express", data)
     .then((res) => {
-      console.log("res", res);
       dispatch({
         type: ADD_ORDER_SUCCESS,
         payload: res.data.order,
       });
-      // close();
+      close();
     })
     .catch((err) => {
       console.log("err", err);
