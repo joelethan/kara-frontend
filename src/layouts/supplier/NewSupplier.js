@@ -14,7 +14,7 @@ import { orderOptions } from "../../constants/api";
 import createSupply from "../../context/actions/users/createSupply";
 import moment from "moment";
 
-const NewSupplier = () => {
+const NewSupplier = ({ close }) => {
   const {
     usersDispatch,
     usersState: {
@@ -52,7 +52,7 @@ const NewSupplier = () => {
       address: form.address,
       date: moment(Date.now()).format(),
     };
-    createSupply(data)(usersDispatch);
+    createSupply({ data, close })(usersDispatch);
     // close();
   };
 
@@ -225,7 +225,7 @@ const NewSupplier = () => {
                   labelPosition="right"
                 >
                   Submit
-                  <Icon name="right arrow" />
+                  <Icon name="paper plane" />
                 </Button>
               </Form>
             </Card.Content>

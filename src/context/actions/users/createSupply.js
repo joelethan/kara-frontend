@@ -6,18 +6,18 @@ import {
 import axiosInstance from "../../../helpers/axiosInstance";
 import { CONNECTION_ERROR } from "../../../constants/api";
 
-export default (data) => (dispatch) => {
+export default ({ data, close }) => (dispatch) => {
   dispatch({
     type: CREATE_SUPPLY_LOADING,
   });
   axiosInstance()
     .post("/supply", data)
     .then((res) => {
-      console.log("res", res);
       dispatch({
         type: CREATE_SUPPLY_SUCCESS,
         payload: res.data.supply,
       });
+      close();
     })
     .catch((err) => {
       dispatch({

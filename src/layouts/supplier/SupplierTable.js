@@ -97,7 +97,7 @@ function SupplierTable() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <NewSupplier />
+          <NewSupplier close={handleCloseNew} />
         </Modal.Body>
       </Modal>
       <Container>
