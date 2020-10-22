@@ -30,7 +30,7 @@ const Invoice = ({ invoice }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <Image style={styles.logo} src={logo} />
-      <InvoiceTitle title="Receipt" />
+      <InvoiceTitle title={invoice.type} />
       <InvoiceNo invoice={invoice} />
       <BillTo invoice={invoice} />
       <InvoiceItemsTable invoice={invoice} />

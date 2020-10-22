@@ -16,6 +16,7 @@ import {
   ADD_ORDER_LOADING,
   UPDATE_ORDER_LOADING,
   UPDATE_ORDER_SUCCESS,
+  UPDATE_ORDER_ERROR,
   UPDATE_SUPPLY_LOADING,
   UPDATE_SUPPLY_SUCCESS,
   UPDATE_SUPPLY_ERROR,
@@ -219,6 +220,15 @@ const users = (state, { payload, type }) => {
             ...[...state.orders.data].filter((obj) => obj._id !== payload._id),
           ],
           // data: removeItemById(state.orders.data, payload._id),
+        },
+      };
+
+    case UPDATE_ORDER_ERROR:
+      return {
+        ...state,
+        orders: {
+          ...state.orders,
+          loading: false,
         },
       };
 

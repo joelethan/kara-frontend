@@ -112,7 +112,7 @@ function MyTable({ searchText }) {
         <Modal.Body>
           {/* Woohoo, you're reading this text in a modal! */}
           <Container style={{ padding: "1rem" }}>
-            <CustomerDetails itemId={itemId} />
+            <CustomerDetails close={handleClose} itemId={itemId} />
           </Container>
         </Modal.Body>
         {/* <Modal.Footer>

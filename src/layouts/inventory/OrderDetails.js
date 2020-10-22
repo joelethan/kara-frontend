@@ -7,13 +7,20 @@ import {
   Table,
   Form,
   Icon,
+  Input,
 } from "semantic-ui-react";
 import moment from "moment";
 import updateOrder from "../../context/actions/users/updateOrder";
 import { GlobalContext } from "../../context/Provider";
 
-const OrderDetails = ({ setReceipt, item }) => {
-  const { usersDispatch } = useContext(GlobalContext);
+const OrderDetails = ({ setReceipt, item, close }) => {
+  const {
+    usersDispatch,
+    setPdfType,
+    usersState: {
+      orders: { loading },
+    },
+  } = useContext(GlobalContext);
 
   const [form, setForm] = useState({});
   const [edit, setEdit] = useState(false);
@@ -25,8 +32,15 @@ const OrderDetails = ({ setReceipt, item }) => {
   };
 
   const onUpdate = () => {
-    updateOrder({ data: form, Id: item._id })(usersDispatch);
+    form.amountCleared &&
+      (form.amountCleared = Number(form.amountCleared) + item.amountCleared);
+
+    updateOrder({ data: form, Id: item._id, close })(usersDispatch);
   };
+
+  const total = item.orderDetails
+    .map((order) => order.quantity * order.unitCost)
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   return (
     <Container>
@@ -56,7 +70,7 @@ const OrderDetails = ({ setReceipt, item }) => {
                 fluid
                 label="Order Status"
                 readOnly={true}
-                value={item.status}
+                value={item ? item.status : ""}
               />
             )}
             {edit && (
@@ -119,32 +133,52 @@ const OrderDetails = ({ setReceipt, item }) => {
             </Table.Header>
 
             <Table.Body>
-              {item.orderDetails.map((order) => (
-                <Table.Row key={order._id}>
-                  <Table.Cell>
-                    {item.orderDetails.indexOf(order) + 1}
-                  </Table.Cell>
-                  <Table.Cell>{order.item}</Table.Cell>
-                  <Table.Cell>{order.quantity}</Table.Cell>
-                  <Table.Cell>{order.unitCost.toLocaleString()}</Table.Cell>
-                  <Table.Cell>
-                    {(order.quantity * order.unitCost).toLocaleString()}
-                  </Table.Cell>
-                </Table.Row>
-              ))}
+              {item &&
+                item.orderDetails.map((order) => (
+                  <Table.Row key={order._id}>
+                    <Table.Cell>
+                      {item.orderDetails.indexOf(order) + 1}
+                    </Table.Cell>
+                    <Table.Cell>{order.item}</Table.Cell>
+                    <Table.Cell>{order.quantity}</Table.Cell>
+                    <Table.Cell>{order.unitCost.toLocaleString()}</Table.Cell>
+                    <Table.Cell>
+                      {(order.quantity * order.unitCost).toLocaleString()}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
               <Table.Row>
                 <Table.Cell></Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell></Table.Cell>
                 <Table.Cell>Total</Table.Cell>
+                <Table.Cell>{item && total.toLocaleString()}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell></Table.Cell>
+                <Table.Cell>Amount Received</Table.Cell>
                 <Table.Cell>
-                  {item.orderDetails
-                    .map((order) => order.quantity * order.unitCost)
-                    .reduce(
-                      (accumulator, currentValue) => accumulator + currentValue,
-                      0
-                    )
-                    .toLocaleString()}
+                  <Input
+                    // style={{ width: "50px" }}
+                    transparent
+                    name="amountCleared"
+                    type="number"
+                    onChange={onChange}
+                    readOnly={!edit}
+                    value={form.amountCleared || item.amountCleared}
+                  />
+                </Table.Cell>
+                <Table.Cell>Balance</Table.Cell>
+                <Table.Cell>
+                  {(
+                    item.orderDetails
+                      .map((order) => order.quantity * order.unitCost)
+                      .reduce(
+                        (accumulator, currentValue) =>
+                          accumulator + currentValue,
+                        0
+                      ) - (form["amountCleared"] || item.amountCleared)
+                  ).toLocaleString()}
                 </Table.Cell>
               </Table.Row>
             </Table.Body>
@@ -157,7 +191,8 @@ const OrderDetails = ({ setReceipt, item }) => {
               rows={5}
               placeholder="Briefly describe the order details"
               name="orderDescription"
-              value={item.orderDescription}
+              onChange={onChange}
+              value={form["orderDescription"] || item.orderDescription}
             />
           </Form.Group>
           {!edit && (
@@ -166,9 +201,13 @@ const OrderDetails = ({ setReceipt, item }) => {
               icon
               labelPosition="right"
               floated="right"
+              size="mini"
+              loading={loading}
+              disabled={loading}
               className="ui negative primary button"
             >
-              Edit <Icon name="edit" />
+              Edit
+              <Icon name="edit" />
             </Button>
           )}
           {edit && (
@@ -180,9 +219,13 @@ const OrderDetails = ({ setReceipt, item }) => {
               icon
               labelPosition="right"
               floated="right"
+              size="mini"
+              loading={loading}
+              disabled={loading}
               className="ui negative primary button"
             >
-              Save <Icon name="paper plane" />
+              Save
+              <Icon name="paper plane" />
             </Button>
           )}
           {!edit && (
@@ -190,12 +233,32 @@ const OrderDetails = ({ setReceipt, item }) => {
               icon
               labelPosition="right"
               floated="right"
+              size="mini"
               className="primary"
               onClick={() => {
+                setPdfType("Receipt");
                 setReceipt();
               }}
             >
-              Print receipt <Icon name="print" />
+              Print Receipt
+              <Icon name="print" />
+            </Button>
+          )}
+          {!edit && (
+            <Button
+              icon
+              labelPosition="right"
+              floated="right"
+              size="mini"
+              className="primary"
+              disabled={item.amountCleared >= total}
+              onClick={() => {
+                setPdfType("Invoice");
+                setReceipt();
+              }}
+            >
+              Print Invoice
+              <Icon name="print" />
             </Button>
           )}
         </Container>

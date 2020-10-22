@@ -21,15 +21,45 @@ const styles = StyleSheet.create({
   },
 });
 
-const InvoiceTableFooter = ({ items }) => {
-  const total = items
+const InvoiceTableFooter = ({ invoice }) => {
+  console.log("invoice", invoice);
+  const total = invoice.items
     .map((order) => order.quantity * order.unitCost)
     .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  return (
-    <View style={styles.row}>
-      <Text style={styles.description}>TOTAL</Text>
-      <Text style={styles.total}>{total.toLocaleString()}</Text>
-    </View>
+
+  // const balance = total - cleared > 0 ? total - cleared : 0;
+  const balance = total - invoice.cleared;
+
+  return invoice.type === "Receipt" ? (
+    <>
+      <View style={styles.row}>
+        <Text style={styles.description}>TOTAL</Text>
+        <Text style={styles.total}>{total.toLocaleString()}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.description}>Amount Received</Text>
+        <Text style={styles.total}>{invoice.cleared.toLocaleString()}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.description}>Balance</Text>
+        <Text style={styles.total}>{balance.toLocaleString()}</Text>
+      </View>
+    </>
+  ) : (
+    <>
+      <View style={styles.row}>
+        <Text style={styles.description}>Subtotal</Text>
+        <Text style={styles.total}>{total.toLocaleString()}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.description}>Amount Cleared</Text>
+        <Text style={styles.total}>{invoice.cleared.toLocaleString()}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.description}>Balance Due</Text>
+        <Text style={styles.total}>{balance.toLocaleString()}</Text>
+      </View>
+    </>
   );
 };
 

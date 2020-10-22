@@ -6,18 +6,18 @@ import {
   UPDATE_USER_ERROR,
 } from "../../../constants/actionTypes";
 
-export default ({ form, Id }) => (dispatch) => {
+export default ({ close, form, Id }) => (dispatch) => {
   dispatch({
     type: UPDATE_USER_LOADING,
   });
   axiosInstance()
     .put("/user/" + Id, form)
     .then((res) => {
-      console.log("res", res);
       dispatch({
         type: UPDATE_USER_SUCCESS,
         payload: res.data,
       });
+      close();
     })
     .catch((err) => {
       console.log("err", err);

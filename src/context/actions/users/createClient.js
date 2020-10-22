@@ -18,7 +18,7 @@ export default (data) => (dispatch) => {
         .then(() => {
           dispatch({
             type: ADD_CLIENT_SUCCESS,
-            payload: data,
+            payload: { _id: res.data._id, ...data },
           });
           data.setShow(false);
         });

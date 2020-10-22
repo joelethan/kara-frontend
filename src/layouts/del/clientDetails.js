@@ -7,7 +7,7 @@ import { primaryColor } from "../../constants/api";
 import updateMeasurements from "../../context/actions/users/updateMeasurements";
 
 // usersDispatch
-function CustomerDetails({ itemId }) {
+function CustomerDetails({ close, itemId }) {
   const {
     usersDispatch,
     usersState: {
@@ -19,11 +19,12 @@ function CustomerDetails({ itemId }) {
   const [edit, setEdit] = useState(true);
 
   let user = itemId;
-  let measurement = measurements.find((item) => item.clientName === itemId._id);
+  let measurement = measurements.find((item) => item.clientName === itemId._id)
+    ? measurements.find((item) => item.clientName === itemId._id)
+    : {};
 
   const sendData = () => {
-    console.log("measurement", measurement);
-    updateMeasurements({ form, Id: measurement._id })(usersDispatch);
+    updateMeasurements({ close, form, Id: measurement._id })(usersDispatch);
   };
 
   const onChange = (e, { name, value }) => {

@@ -6,7 +6,7 @@ import {
   UPDATE_MEASUREMENTS_ERROR,
 } from "../../../constants/actionTypes";
 
-export default ({ form, Id }) => (dispatch) => {
+export default ({ close, form, Id }) => (dispatch) => {
   dispatch({
     type: UPDATE_MEASUREMENTS_LOADING,
   });
@@ -17,6 +17,7 @@ export default ({ form, Id }) => (dispatch) => {
         type: UPDATE_MEASUREMENTS_SUCCESS,
         payload: res.data,
       });
+      close();
     })
     .catch((err) => {
       dispatch({

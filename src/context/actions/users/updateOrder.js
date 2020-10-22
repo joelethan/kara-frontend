@@ -6,7 +6,7 @@ import {
   UPDATE_ORDER_ERROR,
 } from "../../../constants/actionTypes";
 
-export default ({ data, Id }) => (dispatch) => {
+export default ({ data, Id, close }) => (dispatch) => {
   dispatch({
     type: UPDATE_ORDER_LOADING,
   });
@@ -17,6 +17,7 @@ export default ({ data, Id }) => (dispatch) => {
         type: UPDATE_ORDER_SUCCESS,
         payload: res.data,
       });
+      close();
     })
     .catch((err) => {
       dispatch({

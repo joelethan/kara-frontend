@@ -153,8 +153,8 @@ const OrderTable = ({ orderInit, Id }) => {
 
                   setReceiptData({
                     id: getOrdr(currentPosts, element._id)._id,
-                    invoice_no: currentPosts.indexOf(element) + 1,
-                    balance: "$2,283.74",
+                    invoice_no: orderData.indexOf(element) + 1,
+                    cleared: getOrdr(currentPosts, element._id).amountCleared,
                     company: getOrdr(currentPosts, element._id).clientName,
                     email: getClient(
                       getOrdr(currentPosts, element._id).clientId
@@ -212,6 +212,7 @@ const OrderTable = ({ orderInit, Id }) => {
           <OrderDetails
             setReceipt={handleReShow}
             item={getOrdr(currentPosts, itemId)}
+            close={handleClose}
           />
         </Modal.Body>
       </Modal>

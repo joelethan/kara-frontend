@@ -22,6 +22,7 @@ const NewSale = ({ close }) => {
     },
   } = useContext(GlobalContext);
   const [form, setForm] = useState({});
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
@@ -44,6 +45,7 @@ const NewSale = ({ close }) => {
       orderDetails: items,
       clientName: form.clientName,
       assignedTailor: form.assignedTailor,
+      amountCleared: form.amountReceived,
       // contact: form.contact,
       // address: form.address,
       dueDate: moment(Date.now()).format(),
@@ -57,8 +59,6 @@ const NewSale = ({ close }) => {
   let formValid = !(
     form.clientName &&
     form.assignedTailor &&
-    // form.address &&
-    // form.contact &&
     form.orderDetails
   );
 
@@ -68,9 +68,7 @@ const NewSale = ({ close }) => {
     for (const i of form.orderDetails) {
       totalList.push(form[i + "Qty"] * form[i + "Amount"]);
 
-      document.getElementById("setSum").innerHTML = totalList
-        .reduce((a, b) => a + b, 0)
-        .toLocaleString();
+      setTotalAmount(totalList.reduce((a, b) => a + b, 0));
     }
   };
 
@@ -188,7 +186,34 @@ const NewSale = ({ close }) => {
                             </Button>
                           </Table.Cell>
                           <Table.Cell>
-                            <div id="setSum"></div>
+                            {totalAmount.toLocaleString()}
+                          </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                          <Table.Cell></Table.Cell>
+                          <Table.Cell>Amount Received</Table.Cell>
+                          <Table.Cell>
+                            <Input
+                              name={"amountReceived"}
+                              type="number"
+                              onChange={onChange}
+                              value={
+                                form["amountReceived"]
+                                  ? form["amountReceived"]
+                                  : ""
+                              }
+                              transparent
+                            />
+                          </Table.Cell>
+                          <Table.Cell>
+                            <Button size="tiny" primary floated="left" basic>
+                              Bal
+                            </Button>
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(
+                              form["amountReceived"] - totalAmount
+                            ).toLocaleString()}
                           </Table.Cell>
                         </Table.Row>
                       </Table.Body>

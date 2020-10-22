@@ -44,8 +44,7 @@ const MemberDetails = ({ close, staff, id }) => {
   let userStatus = checked ? "User is Active" : "User is In-Active";
 
   const onSubmit = () => {
-    updateUser({ form, Id: item._id })(usersDispatch);
-    console.log("form", form);
+    updateUser({ close, form, Id: item._id })(usersDispatch);
   };
 
   return (
