@@ -20,7 +20,6 @@ export default ({ close, form, Id }) => (dispatch) => {
       close();
     })
     .catch((err) => {
-      console.log("err", err);
       dispatch({
         type: UPDATE_USER_ERROR,
         payload: CONNECTION_ERROR,

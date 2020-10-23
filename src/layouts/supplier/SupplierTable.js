@@ -21,10 +21,6 @@ function SupplierTable() {
     },
   } = useContext(GlobalContext);
 
-  const onClick = (id) => {
-    console.log("onClick", id);
-  };
-
   const [show, setShow] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [itemId, setItemId] = useState(null);
@@ -130,7 +126,6 @@ function SupplierTable() {
                     return (
                       <Table.Row
                         onClick={() => {
-                          onClick(element._id);
                           setItemId(element._id);
                           handleShowDt();
                         }}

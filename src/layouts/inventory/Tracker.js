@@ -64,7 +64,6 @@ const Tracker = ({
 
       <Table.Body>
         {output3.map((_item, i) => (
-          // console.log('_item', _item)
           <Table.Row key={_item + i}>
             <Table.Cell>{output3.indexOf(_item) + 1}</Table.Cell>
             <Table.Cell>{Object.keys(data)[i]}</Table.Cell>

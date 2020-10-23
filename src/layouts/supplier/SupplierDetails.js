@@ -12,7 +12,6 @@ import updateSupply from "../../context/actions/users/updateSupply";
 import { GlobalContext } from "../../context/Provider";
 
 const SupplierDetails = ({ item }) => {
-  console.log("item", item);
   const {
     usersDispatch,
     usersState: {
@@ -183,19 +182,6 @@ const SupplierDetails = ({ item }) => {
               Save <Icon name="paper plane" />
             </Button>
           )}
-          {/* {!edit && (
-            <Button
-              icon
-              labelPosition="right"
-              floated="right"
-              className="primary"
-              onClick={() => {
-                console.log("object");
-              }}
-            >
-              Print receipt <Icon name="print" />
-            </Button>
-          )} */}
         </Container>
       </Form>
     </Container>

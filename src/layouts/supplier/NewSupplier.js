@@ -27,11 +27,6 @@ const NewSupplier = ({ close }) => {
     setForm({ ...form, [name]: value });
   };
 
-  // const onSubmit = () => {
-  //   console.log("form.supplyDetails", form.supplyDetails);
-  //   createSupply(form)(usersDispatch);
-  // };
-
   const onSubmit = ({ items = [] }) => {
     for (const i of form.supplyDetails) {
       items = [

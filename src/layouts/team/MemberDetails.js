@@ -21,7 +21,6 @@ const MemberDetails = ({ close, staff, id }) => {
       users: { loadin },
     },
   } = useContext(GlobalContext);
-  console.log("loadin", loadin);
   const item = staff.find((item) => item._id === id);
 
   const [edit, setEdit] = useState(true);

@@ -21,7 +21,6 @@ export default ({ data, close }) => (dispatch) => {
       close();
     })
     .catch((err) => {
-      console.log("err", err);
       dispatch({
         type: ADD_ORDER_ERROR,
         payload: err.response ? err.response.data : CONNECTION_ERROR,

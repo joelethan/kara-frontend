@@ -13,7 +13,6 @@ export default ({ data, Id }) => (dispatch) => {
   axiosInstance()
     .put("/supply/" + Id, data)
     .then((res) => {
-      console.log("res", res);
       dispatch({
         type: UPDATE_SUPPLY_SUCCESS,
         payload: res.data,

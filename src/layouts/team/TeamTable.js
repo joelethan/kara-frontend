@@ -10,10 +10,6 @@ function TeamTable({
   },
   searchText,
 }) {
-  const onClick = (id) => {
-    console.log("onClick", id);
-  };
-
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -81,7 +77,6 @@ function TeamTable({
               currentPosts.map((element) => (
                 <Table.Row
                   onClick={() => {
-                    onClick(element._id);
                     setItemId(element._id);
                     handleShow();
                   }}

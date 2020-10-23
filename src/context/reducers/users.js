@@ -80,7 +80,6 @@ const users = (state, { payload, type }) => {
       };
 
     case ADD_CLIENT_SUCCESS:
-      console.log("payload", payload);
       return {
         ...state,
         // addClient: {

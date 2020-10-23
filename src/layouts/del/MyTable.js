@@ -12,10 +12,6 @@ function MyTable({ searchText }) {
     },
   } = useContext(GlobalContext);
 
-  const onClick = (id) => {
-    console.log("onClick", id);
-  };
-
   const [show, setShow] = useState(false);
   const [itemId, setItemId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,7 +78,6 @@ function MyTable({ searchText }) {
                 currentClients.map((element) => (
                   <Table.Row
                     onClick={() => {
-                      onClick(element._id);
                       setItemId(element);
                       handleShow();
                     }}
