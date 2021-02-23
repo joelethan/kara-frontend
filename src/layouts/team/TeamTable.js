@@ -100,6 +100,7 @@ function TeamTable({
       />
 
       <Modal
+        backdrop="static"
         size="lg"
         show={show}
         onHide={handleClose}

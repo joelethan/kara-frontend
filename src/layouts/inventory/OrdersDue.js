@@ -186,6 +186,7 @@ const OrdersDue = ({ orderInit, Id }) => {
         {/* Order Details */}
 
         <Modal
+          backdrop="static"
           size="lg"
           show={show}
           onHide={handleClose}
@@ -205,6 +206,7 @@ const OrdersDue = ({ orderInit, Id }) => {
         {/* Receipt Modal */}
 
         <Modal
+          backdrop="static"
           size="lg"
           show={reShow}
           onHide={() => setReShow(false)}

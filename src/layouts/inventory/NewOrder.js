@@ -1,11 +1,11 @@
-import { Form, Button, Table, Input } from "semantic-ui-react";
-import { GlobalContext } from "../../context/Provider";
-import React, { useState, useContext } from "react";
-import { orderOptions } from "../../constants/api";
-import { Container } from "react-bootstrap";
 import moment from "moment";
-import createOrder from "../../context/actions/users/createOrder";
+import React, { useContext, useState } from "react";
+import { Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { Button, Form, Input, Table } from "semantic-ui-react";
+import { orderOptions } from "../../constants/api";
+import createOrder from "../../context/actions/users/createOrder";
+import { GlobalContext } from "../../context/Provider";
 
 const NewOrder = ({ close, Id }) => {
   const {
@@ -63,7 +63,13 @@ const NewOrder = ({ close, Id }) => {
     }
   };
 
-  let customerName = item ? item.firstName + " " + item.lastName : "";
+  let customerName = "";
+  if (item && item.firstName) {
+    customerName = customerName + item.firstName;
+  }
+  if (item && item.lastName) {
+    customerName = customerName + item.lastName;
+  }
 
   let showItem = form["orderItems"] ? !!form["orderItems"].length : false;
 

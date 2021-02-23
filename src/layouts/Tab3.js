@@ -37,7 +37,7 @@ const Tab3 = () => {
 
       <TeamTable searchText={searchText} state={usersState} />
 
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal backdrop="static" size="lg" show={show} onHide={handleClose}>
         <Modal.Header>New Team Member</Modal.Header>
         <NewMember setShow={setShow} />
       </Modal>

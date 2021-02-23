@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Header, Card, Form, Icon } from "semantic-ui-react";
+import { Button, Card, Form, Grid, Header, Icon } from "semantic-ui-react";
 import { genderOptions } from "../../constants/api";
 
 function Form1({ form, nextStep, onChange, formValid }) {

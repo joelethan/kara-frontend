@@ -36,14 +36,7 @@ function ModalExample() {
     createClient(form)(usersDispatch);
   };
 
-  let formValid =
-    form.firstName &&
-    form.lastName &&
-    form.email &&
-    form.address &&
-    form.contact &&
-    form.gender;
-  formValid = !formValid;
+  let formValid = !form.firstName;
 
   return (
     <>

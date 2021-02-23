@@ -82,13 +82,10 @@ const users = (state, { payload, type }) => {
     case ADD_CLIENT_SUCCESS:
       return {
         ...state,
-        // addClient: {
-        //   ...state.addClient,
-        //   loading: false,
-        //   data: payload,
-        //   measurements: payload,
-        //   error: null,
-        // },
+        addClient: {
+          ...state.addClient,
+          loading: false,
+        },
         users: {
           ...state.users,
           loading: false,

@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Table, Container, Placeholder } from "semantic-ui-react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import CustomerDetails from "./clientDetails";
-import Pagination from "../../helpers/Pagination";
+import { Container, Placeholder, Table } from "semantic-ui-react";
 import { GlobalContext } from "../../context/Provider";
+import Pagination from "../../helpers/Pagination";
+import CustomerDetails from "./clientDetails";
 
 function MyTable({ searchText }) {
   const {
@@ -32,9 +32,12 @@ function MyTable({ searchText }) {
   // Searched Clients
   const foundClients = clients.filter((item) => {
     return (
-      item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
-      item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1 ||
-      item.address.toLowerCase().search(searchText.toLowerCase()) !== -1
+      (item.firstName &&
+        item.firstName.toLowerCase().search(searchText.toLowerCase()) !== -1) ||
+      (item.lastName &&
+        item.lastName.toLowerCase().search(searchText.toLowerCase()) !== -1) ||
+      (item.address &&
+        item.address.toLowerCase().search(searchText.toLowerCase()) !== -1)
     );
   });
 
@@ -100,7 +103,7 @@ function MyTable({ searchText }) {
           />
         </>
       )}
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal backdrop="static" size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Client Details</Modal.Title>
         </Modal.Header>

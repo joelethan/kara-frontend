@@ -56,11 +56,7 @@ const NewSale = ({ close }) => {
     createSale({ data, close })(usersDispatch);
   };
 
-  let formValid = !(
-    form.clientName &&
-    form.assignedTailor &&
-    form.orderDetails
-  );
+  let formValid = !(form.clientName && form.orderDetails);
 
   const onConfirm = () => {
     let totalList = [];
@@ -194,6 +190,7 @@ const NewSale = ({ close }) => {
                           <Table.Cell>Amount Received</Table.Cell>
                           <Table.Cell>
                             <Input
+                              style={{ backgroundColor: "#e5dada" }}
                               name={"amountReceived"}
                               type="number"
                               onChange={onChange}

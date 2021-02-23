@@ -150,6 +150,7 @@ function SupplierTable() {
         )}
 
         <Modal
+          backdrop="static"
           size="lg"
           show={show}
           onHide={handleCloseDt}

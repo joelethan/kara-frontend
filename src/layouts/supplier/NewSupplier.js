@@ -1,18 +1,18 @@
-import React, { useState, useContext } from "react";
+import moment from "moment";
+import React, { useContext, useState } from "react";
 import {
   Button,
-  Grid,
-  Header,
   Card,
   Form,
+  Grid,
+  Header,
   Icon,
-  Table,
   Input,
+  Table,
 } from "semantic-ui-react";
-import { GlobalContext } from "../../context/Provider";
 import { orderOptions } from "../../constants/api";
 import createSupply from "../../context/actions/users/createSupply";
-import moment from "moment";
+import { GlobalContext } from "../../context/Provider";
 
 const NewSupplier = ({ close }) => {
   const {
@@ -48,16 +48,9 @@ const NewSupplier = ({ close }) => {
       date: moment(Date.now()).format(),
     };
     createSupply({ data, close })(usersDispatch);
-    // close();
   };
 
-  let formValid = !(
-    form.nameOfSupplier &&
-    form.email &&
-    form.address &&
-    form.contact &&
-    form.supplyDetails
-  );
+  let formValid = !form.nameOfSupplier;
 
   const onConfirm = () => {
     let totalList = [];
